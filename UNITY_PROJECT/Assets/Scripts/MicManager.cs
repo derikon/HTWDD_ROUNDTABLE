@@ -36,12 +36,12 @@ public class MicManager : MonoBehaviour
         // assign every mic to some player
         foreach (var microphone in microphones)
         {
-            var receiver = playerQueue.Dequeue();
-            if (receiver == null)
+            if (playerQueue.Count == 0)
             {
                 Debug.Log("All receivers now have a mic assigned");
                 break;
             }
+            var receiver = playerQueue.Dequeue();
 
             var audioComponent = receiver.GetComponent<AudioSource>();
             if (audioComponent == null)
