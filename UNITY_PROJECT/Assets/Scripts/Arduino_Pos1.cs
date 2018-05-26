@@ -4,12 +4,7 @@ using UnityEngine;
 using System.IO.Ports;
 
 public class Arduino_Pos1 : MonoBehaviour
-{
-
-    private Color currentColor;
-    private Material materialColored;
-
-    public Color ObjectColor;    
+{ 
     public bool tokenIsPlaced = false;
 
     // supported baudrate is 9600

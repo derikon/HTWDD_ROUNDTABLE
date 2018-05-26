@@ -622,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da7ecab3a9de4e8cb369e65e4e18fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JsonReader: {fileID: 0}
 --- !u!1001 &1127155547
 Prefab:
   m_ObjectHideFlags: 0
@@ -742,6 +743,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1160234157}
+  - component: {fileID: 1160234158}
   m_Layer: 0
   m_Name: Pos1
   m_TagString: Untagged
@@ -762,6 +764,18 @@ Transform:
   m_Father: {fileID: 836382122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1160234158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160234156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c406818322844924ebbeb4be7a82e73d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tokenIsPlaced: 0
 --- !u!1 &1188134157
 GameObject:
   m_ObjectHideFlags: 0
