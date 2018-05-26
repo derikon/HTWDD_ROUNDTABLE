@@ -51,6 +51,7 @@ public class MicManager : MonoBehaviour
 
             audioComponent.clip =
                 Microphone.Start(microphone, true, RECORDING_DURATION, AudioSettings.outputSampleRate);
+            audioComponent.Play();
         }
 
 
