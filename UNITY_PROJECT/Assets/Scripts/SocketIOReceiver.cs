@@ -5,6 +5,8 @@ public class SocketIOReceiver : MonoBehaviour {
 
     private SocketIOComponent socket;
 
+    public JsonReader JsonReader;
+
     private void Start() {
         var socketIO = GameObject.Find("SocketIO");
         socket = socketIO.GetComponent<SocketIOComponent>();
