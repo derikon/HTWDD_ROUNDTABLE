@@ -1,0 +1,7 @@
+{
+    "uid": "socket_server",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "./"
+}

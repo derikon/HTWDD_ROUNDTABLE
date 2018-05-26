@@ -1,0 +1,11 @@
+{
+  "name": "socket_server",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "socket.io": "~1.2.0",
+    "serialport": "~6.2.0"
+  }
+}

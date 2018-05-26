@@ -1,0 +1,6 @@
+{
+	"host": "localhost",
+	"port": 8989,
+	"serial": "/dev/tty.usbserial-AI04KYNS",
+	"baud": 9600
+}
