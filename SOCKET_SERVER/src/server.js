@@ -4,7 +4,6 @@ const socket_io = require("socket.io")({
 });
 
 
-// establish socket server listening on a given port
 socket_io.attach(srv_config.port);
 
 
@@ -18,20 +17,17 @@ socket_io.on("connection", (socket) => {
 	});
 
 
-	socket.on("trigger_lift", (data) => {
-		socket.broadcast.emit("lift", {});
-		console.log("triggered lift");
+	socket.on("message", (data) => {
+		switch (data.topic) {
+			// [TODO] add topics to handle
+			case "token":
+				console.log("received topic: " + data.topic);
+				console.log("received: " + JSON.stringify(data));
+				socket.broadcast.emit("token", data);
+			break;
+			default:
+				console.log("received unknown topic: " + data.topic);
+				console.log("received: " + JSON.stringify(data));
+		}
 	});
-
-
-	socket.on("token_detected", (data) => {
-		socket.broadcast.emit("lift", {});
-		console.log("token detected: " + data.uid);
-	});
-
-
-	socket.on("ack", (data) => {
-		console.log("client received trigger");
-	});
-
 });
