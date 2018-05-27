@@ -25,6 +25,11 @@ socket_io.on("connection", (socket) => {
 				console.log("received: " + JSON.stringify(data));
 				socket.broadcast.emit("token", data);
 			break;
+			case "discussion":
+				console.log("received topic: " + data.topic);
+				console.log("received: " + JSON.stringify(data));
+				socket.broadcast.emit("discussion", data);
+			break;
 			default:
 				console.log("received unknown topic: " + data.topic);
 				console.log("received: " + JSON.stringify(data));
