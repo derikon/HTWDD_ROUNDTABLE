@@ -34,82 +34,109 @@ public class JsonReader : MonoBehaviour
 
         foreach (var key in keyArray)
         {
-            if (jsonDiscussion["title"] != null)
+            if (jsonDiscussion[key] != null)
             {
-                Debug.Log("Got tittle: " + jsonDiscussion["title"]);
-                if (jsonDiscussion["title"].type == JSONObject.Type.STRING)
+                if (jsonDiscussion[key].Equals("title"))
                 {
-                    discussion.title = jsonDiscussion["title"].ToString();
-                }
-
-            }
-            else if (jsonDiscussion["duration"] != null)
-            {
-                Debug.Log("Got Duration: " + jsonDiscussion["duration"]);
-                if (jsonDiscussion["duration"].type == JSONObject.Type.NUMBER)
-                {
-                    discussion.duration = (int)jsonDiscussion["duration"].n;
-                }
-
-            }
-            else if (jsonDiscussion["member"] != null)
-            {
-                Debug.Log("Got MemberList: ");
-                if (jsonDiscussion["member"].type == JSONObject.Type.ARRAY)
-                {
-                    foreach (JSONObject currentMember in jsonDiscussion["member"].list)
+                    if (jsonDiscussion[key].type == JSONObject.Type.STRING)
                     {
-                        Member newMember = new Member();
-                        var keyArray2 = currentMember.keys.ToArray();
-
-                        foreach (var key2 in keyArray2)
-                        {
-                            if (currentMember["name"] != null)
-                            {
-                                Debug.Log("Got newMember name: " + currentMember["name"]);
-                                if (currentMember["name"].type == JSONObject.Type.STRING)
-                                {
-                                    newMember.name = currentMember["name"].ToString();
-                                }
-                            }
-                            else if (currentMember["title"] != null)
-                            {
-                                Debug.Log("Got newMember title: " + currentMember["title"]);
-                                if (currentMember["title"].type == JSONObject.Type.STRING)
-                                {
-                                    newMember.title = currentMember["title"].ToString();
-                                }
-                            }
-
-                            else if (currentMember["role"] != null)
-                            {
-                                Debug.Log("Got newMember role: " + currentMember["role"]);
-                                if (currentMember["role"].type == JSONObject.Type.STRING)
-                                {
-                                    newMember.role = currentMember["role"].ToString();
-                                }
-                            }
-
-                            else if (currentMember["placenumber"] != null)
-                            {
-                                Debug.Log("Got newMember placenumber: " + currentMember["placenumber"]);
-                                if (currentMember["placenumber"].type == JSONObject.Type.NUMBER)
-                                {
-                                    newMember.placenumber = (int)currentMember["role"].n;
-                                }
-                            }
-
-                            memberList.Add(newMember);
-                        }
-
+                        Debug.Log("Got title: " + jsonDiscussion[key]);
+                        discussion.title = jsonDiscussion[key].ToString();
                     }
+                    else
+                    {
+                        Debug.Log("False Datatype " + jsonDiscussion[key]);
+                    }
+                }
+                else if (jsonDiscussion[key].Equals("duration"))
+                {
 
+                    if (jsonDiscussion[key].type == JSONObject.Type.NUMBER)
+                    {
+                        Debug.Log("Got Duration: " + jsonDiscussion[key]);
+                        discussion.duration = (int)jsonDiscussion[key].n;
+                    }
+                    else
+                    {
+                        Debug.Log("False Datatype " + jsonDiscussion[key]);
+                    }
+                }
+                else if (jsonDiscussion[key].Equals("member"))
+                {
+                    if (jsonDiscussion[key].type == JSONObject.Type.ARRAY)
+                    {
+                        foreach (JSONObject currentMember in jsonDiscussion[key].list)
+                        {
+                            Member newMember = new Member();
+                            var keyArray2 = currentMember.keys.ToArray();
+                            Debug.Log("Got MemberList:");
+
+                            foreach (var key2 in keyArray2)
+                            {
+                                if (currentMember[key2] != null)
+                                {
+                                    if (currentMember[key2].Equals("name"))
+                                    {
+                                        if (currentMember[key2].type == JSONObject.Type.STRING)
+                                        {
+                                            Debug.Log("Got newMember name: " + currentMember[key2]);
+                                            newMember.name = currentMember[key2].ToString();
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("False Datatype " + jsonDiscussion[key2]);
+                                        }
+                                    }
+                                    else if (currentMember[key2].Equals("title"))
+                                    {
+                                        if (currentMember[key2].type == JSONObject.Type.STRING)
+                                        {
+                                            Debug.Log("Got newMember title: " + currentMember[key2]);
+                                            newMember.title = currentMember[key2].ToString();
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("False Datatype " + jsonDiscussion[key2]);
+                                        }
+                                    }
+                                    else if (currentMember[key2].Equals("role"))
+                                    {
+                                        if (currentMember[key2].type == JSONObject.Type.STRING)
+                                        {
+                                            Debug.Log("Got newMember role: " + currentMember["role"]);
+                                            newMember.role = currentMember[key2].ToString();
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("False Datatype " + jsonDiscussion[key2]);
+                                        }
+                                    }
+                                    else if (currentMember[key2].Equals("placenumber"))
+                                    {
+                                        if (currentMember[key2].type == JSONObject.Type.NUMBER)
+                                        {
+                                            Debug.Log("Got newMember placenumber: " + currentMember[key2]);
+                                            newMember.placenumber = (int)currentMember[key2].n;
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("False Datatype " + jsonDiscussion[key2]);
+                                        }
+                                    }
+                                    memberList.Add(newMember);
+                                }
+                                else
+                                {
+                                    Debug.Log("UnknownTag: " + jsonDiscussion[key2].ToString());
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {
                     Debug.Log("UnknownTag: " + jsonDiscussion[key].ToString());
                 }
-
             }
         }
         return discussion;
