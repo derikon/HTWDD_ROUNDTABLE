@@ -6,13 +6,15 @@ public class PlayerSpawner : MonoBehaviour
 {
 	public GameObject PlayerPrefab;
 
+	public GameObject VideoPlayerPrefab;
+
 	public GameObject PlayerPositionsHolder;
 	
 	// Use this for initialization
 	void Start () {
 		if (PlayerPositionsHolder == null)
 		{
-			Debug.LogError("No position holder obejct specified");
+			Debug.LogError("No position holder obeject specified");
 			return;
 		}
 
@@ -23,12 +25,16 @@ public class PlayerSpawner : MonoBehaviour
 		}
 		
 		var transforms = PlayerPositionsHolder.GetComponentsInChildren<Transform>();
+		var arduinoScripts = PlayerPositionsHolder.GetComponentsInChildren<ArduinoPosition>();
 
 		// start from i=1 to exclude the parent object itself
 		for (var i = 1; i < transforms.Length; i++)
 		{
 			var t = transforms[i];
 			var player = GameObject.Instantiate(PlayerPrefab, t);
+			var videoplayer = GameObject.Instantiate(VideoPlayerPrefab, t);
+
+			arduinoScripts[i-1].Cube = videoplayer;
 
 			// TODO: will be different if we use TextMeshPro
 			var textMesh = player.GetComponent<TextMesh>();

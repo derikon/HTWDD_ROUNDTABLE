@@ -12,12 +12,26 @@ public class ArduinoPosition : MonoBehaviour
     private string COMPort = "";
     [SerializeField]
     private string position = "";
+
     [SerializeField]
-    GameObject cube;
+    private GameObject cube;
     private VideoPlayer videoPlayer;
 
     // supported baudrate is 9600
     private SerialPort serialPort;
+
+    public GameObject Cube
+    {
+        get
+        {
+            return cube;
+        }
+
+        set
+        {
+            cube = value;
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -41,16 +55,16 @@ public class ArduinoPosition : MonoBehaviour
             Debug.LogError("Port undefined!");
         }
 
-        if (cube != null)
+        if (Cube != null)
         {
-            videoPlayer = cube.GetComponent<VideoPlayer>();
+            videoPlayer = Cube.GetComponent<VideoPlayer>();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (COMPort != "" && cube != null)
+        if (COMPort != "" && Cube != null)
         {
             if (serialPort.IsOpen)
             {
@@ -64,19 +78,19 @@ public class ArduinoPosition : MonoBehaviour
                             case "1":
                                 Debug.Log("Token on Position " + position + " is placed!");
                                 tokenIsPlaced = true;
-                                cube.SetActive(tokenIsPlaced);
+                                Cube.SetActive(tokenIsPlaced);
                                 videoPlayer.Play();
                                 break;
 
                             case "0":
                                 Debug.Log("Token on Position " + position + " is removed!");
                                 tokenIsPlaced = false;
-                                cube.SetActive(tokenIsPlaced);
+                                Cube.SetActive(tokenIsPlaced);
                                 videoPlayer.Stop();
                                 break;
 
                             default:
-                                Debug.LogWarning("COMPort " + COMPort + " - Unkown Output from Arduino: " + output);
+                                Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
                                 break;
                         }
 
