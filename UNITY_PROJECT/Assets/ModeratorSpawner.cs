@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpawner : MonoBehaviour
+public class ModeratorSpawner : MonoBehaviour
 {
     public GameObject PlayerPrefab;
-
     public GameObject VideoPlayerPrefab;
-
-    public GameObject PlayerPositionsHolder;
+    public GameObject ModeratorPositionsHolder;
 
     // Use this for initialization
     void Start()
     {
-        if (PlayerPositionsHolder == null)
+        if (ModeratorPositionsHolder == null)
         {
             Debug.LogError("No position holder obeject specified");
             return;
@@ -25,8 +23,8 @@ public class PlayerSpawner : MonoBehaviour
             return;
         }
 
-        var transforms = PlayerPositionsHolder.GetComponentsInChildren<Transform>();
-        var arduinoScripts = PlayerPositionsHolder.GetComponentsInChildren<TokenMember>();
+        var transforms = ModeratorPositionsHolder.GetComponentsInChildren<Transform>();
+        var arduinoScripts = ModeratorPositionsHolder.GetComponentsInChildren<TokenModerator>();
 
         // start from i=1 to exclude the parent object itself
         for (var i = 1; i < transforms.Length; i++)
@@ -41,7 +39,7 @@ public class PlayerSpawner : MonoBehaviour
             var textMesh = player.GetComponent<TextMesh>();
             if (textMesh != null)
             {
-                textMesh.text = "Player " + i;
+                textMesh.text = "Moderator " + i;
             }
         }
     }

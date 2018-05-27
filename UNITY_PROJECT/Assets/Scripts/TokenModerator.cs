@@ -4,16 +4,14 @@ using UnityEngine;
 using System.IO.Ports;
 using UnityEngine.Video;
 
-public class ArduinoPosition : MonoBehaviour
-{ 
+public class TokenModerator : MonoBehaviour
+{
     [SerializeField]
     private bool tokenIsPlaced = false;
     [SerializeField]
     private string COMPort = "";
     [SerializeField]
     private string position = "";
-
-    [SerializeField]
     private GameObject cube;
     private VideoPlayer videoPlayer;
 
@@ -36,7 +34,7 @@ public class ArduinoPosition : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(COMPort != "")
+        if (COMPort != "")
         {
             serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
             try
@@ -76,14 +74,13 @@ public class ArduinoPosition : MonoBehaviour
                         switch (output)
                         {
                             case "1":
-                                Debug.Log("Token on Position " + position + " is placed!");
                                 tokenIsPlaced = true;
                                 Cube.SetActive(tokenIsPlaced);
+                                BuzzerAction();
                                 videoPlayer.Play();
                                 break;
 
                             case "0":
-                                Debug.Log("Token on Position " + position + " is removed!");
                                 tokenIsPlaced = false;
                                 Cube.SetActive(tokenIsPlaced);
                                 videoPlayer.Stop();
@@ -100,12 +97,18 @@ public class ArduinoPosition : MonoBehaviour
                 {
                     // Nothing to do here, because else the log would be flooded
                 }
-            } 
+            }
         }
     }
 
     public bool TokenIsPlaced()
     {
         return tokenIsPlaced;
+    }
+
+    // TODO: implement (animation)
+    private void BuzzerAction()
+    {
+        Debug.LogError("MODERATOR BUZZER!");
     }
 }
