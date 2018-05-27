@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 1043976271}
   m_Layer: 5
   m_Name: TabletDisplay
-  m_TagString: Untagged
+  m_TagString: TabletText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -533,7 +533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da7ecab3a9de4e8cb369e65e4e18fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JsonReader: {fileID: 0}
+  JsonReader: {fileID: 1464668681}
+  DiscussionManager: {fileID: 1760063016}
 --- !u!1001 &1127155547
 Prefab:
   m_ObjectHideFlags: 0
@@ -654,6 +655,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1464668680}
+  - component: {fileID: 1464668681}
   m_Layer: 0
   m_Name: JsonReader
   m_TagString: Untagged
@@ -674,6 +676,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1464668681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1464668679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a31fd3cd66249d0a8813a7accf7b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725166444
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +728,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RECORDING_DURATION: 100
+--- !u!1 &1760063015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1760063017}
+  - component: {fileID: 1760063016}
+  m_Layer: 0
+  m_Name: DiscussionManager
+  m_TagString: DiscussionManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1760063016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1760063015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede40c4ee41e2b940842e930645c9f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TabletText: {fileID: 1043976271}
+--- !u!4 &1760063017
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1760063015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 745.16785, y: 530.1119, z: -41.985477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1884057669
 GameObject:
   m_ObjectHideFlags: 0

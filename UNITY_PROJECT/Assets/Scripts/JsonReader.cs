@@ -7,7 +7,7 @@ public class Member
 {
     public string name;
     public string title;
-    public string description;
+    public string role;
     public int placenumber;
     public string organisation;
 }
@@ -111,15 +111,15 @@ public class JsonReader : MonoBehaviour
                     }
                     break;
 
-                case "description":
+                case "role":
                     if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
                     {
-                        Debug.Log("Got description: " + currentMemberInfo.list[0]);
-                        newMember.description = currentMemberInfo.list[0].ToString();
+                        Debug.Log("Got role: " + currentMemberInfo.list[0]);
+                        newMember.role = currentMemberInfo.list[0].ToString();
                     }
                     else
                     {
-                        Debug.LogWarning("Case 'description'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
+                        Debug.LogWarning("Case 'role'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
                     }
                     break;
 

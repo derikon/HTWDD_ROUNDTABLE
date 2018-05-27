@@ -10,9 +10,12 @@ public class CirclePlacement : MonoBehaviour {
 
 	private List<GameObject> players = new List<GameObject>();
 	private float oldRadius;
-	
+    private DiscussionManager discussionManager;
+
 	void Start()
 	{
+        // find discussion manager
+        discussionManager = GameObject.FindGameObjectWithTag("DiscussionManager").GetComponent<DiscussionManager>();
 		oldRadius = Radius;
 		Vector3 center = transform.position;
 		for (int i = 0; i < numObjects; i++)
@@ -41,6 +44,8 @@ public class CirclePlacement : MonoBehaviour {
 				textMesh.text = "Player " + i;
 			}
 		}
+
+        discussionManager.FindAllPlayers();
 	}
 	
 		

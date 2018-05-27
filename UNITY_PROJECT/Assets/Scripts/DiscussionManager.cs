@@ -13,12 +13,15 @@ public class DiscussionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        discussionMembers.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-
-        if (TabletText == null)
-        {
+        if (TabletText == null) {
             TabletText = GameObject.FindGameObjectWithTag("TabletText").GetComponent<Text>();
         }
+    }
+
+    public void FindAllPlayers() {
+        if (discussionMembers != null && discussionMembers.Count > 0) return;
+
+        discussionMembers.AddRange(GameObject.FindGameObjectsWithTag("Player"));
     }
 
     public void OnDiscussionReady(Discussion discussion)
