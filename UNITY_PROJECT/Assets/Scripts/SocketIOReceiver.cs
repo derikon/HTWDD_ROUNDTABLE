@@ -7,9 +7,20 @@ public class SocketIOReceiver : MonoBehaviour {
 
     public JsonReader JsonReader;
 
+    public DiscussionManager DiscussionManager;
+    
     private void Start() {
-        var socketIO = GameObject.Find("SocketIO");
-        socket = socketIO.GetComponent<SocketIOComponent>();
+        if (DiscussionManager == null)
+        {
+            DiscussionManager = GameObject.FindGameObjectWithTag("DiscussionManager").GetComponent<DiscussionManager>();
+        }
+        
+        socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
+        if (socket == null)
+        {
+            Debug.LogError("Socket not found!");
+            return;
+        }
         socket.Connect();
         socket.On("open", OnOpen);
         socket.On("error", OnError);
