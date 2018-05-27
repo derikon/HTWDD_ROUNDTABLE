@@ -8,8 +8,17 @@ public class TokenMember : MonoBehaviour
 {
     [SerializeField]
     private bool tokenIsPlaced = false;
-    [SerializeField]
-    private string COMPort = "";
+    private string comPort;
+    public string COMPort
+    {
+        get { return comPort; }
+        set
+        {
+            if (comPort == value) return;
+            comPort = value;
+        }
+    }
+
     [SerializeField]
     private string position = "";
     private GameObject cube;
