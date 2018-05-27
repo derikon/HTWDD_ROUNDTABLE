@@ -43,9 +43,7 @@ public class ArduinoPosition : MonoBehaviour
 
         if (cube != null)
         {
-            Debug.Log("Port " + COMPort + " - cube set");
             videoPlayer = cube.GetComponent<VideoPlayer>();
-            Debug.Log("VideoPlayer: " + videoPlayer.ToString());
         }
     }
 
@@ -67,14 +65,13 @@ public class ArduinoPosition : MonoBehaviour
                                 Debug.Log("Token on Position " + position + " is placed!");
                                 tokenIsPlaced = true;
                                 cube.SetActive(tokenIsPlaced);
-                                Debug.Log("VideoPlayer PLAY: " + videoPlayer.ToString());
                                 videoPlayer.Play();
                                 break;
 
                             case "0":
                                 Debug.Log("Token on Position " + position + " is removed!");
                                 tokenIsPlaced = false;
-                                //cube.SetActive(tokenIsPlaced);
+                                cube.SetActive(tokenIsPlaced);
                                 videoPlayer.Stop();
                                 break;
 
