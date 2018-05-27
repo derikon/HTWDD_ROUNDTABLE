@@ -4,16 +4,17 @@ using UnityEngine;
 using System.IO.Ports;
 using UnityEngine.Video;
 
-public class TokenMember : MonoBehaviour
-{
+public class TokenMember : MonoBehaviour {
+    public GameObject screen;
+
+
     [SerializeField]
     private bool tokenIsPlaced = false;
+
     private string comPort;
-    public string COMPort
-    {
+    public string COMPort {
         get { return comPort; }
-        set
-        {
+        set {
             if (comPort == value) return;
             comPort = value;
         }
@@ -21,7 +22,6 @@ public class TokenMember : MonoBehaviour
 
     [SerializeField]
     private string position = "";
-    private GameObject cube;
     private VideoPlayer videoPlayer;
 
     [SerializeField]
@@ -30,115 +30,80 @@ public class TokenMember : MonoBehaviour
     // supported baudrate is 9600
     private SerialPort serialPort;
 
-    public GameObject Cube
-    {
-        get
-        {
-            return cube;
-        }
-
-        set
-        {
-            cube = value;
-        }
-    }
-
     // Use this for initialization
-    void Start()
-    {
-        if (COMPort != "")
-        {
-            serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
-            try
-            {
-                serialPort.Open();
-            }
-            catch (System.Exception)
-            {
-                Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
-                throw;
-            }
-            serialPort.ReadTimeout = 10;
-        }
-        else
-        {
-            Debug.LogError("Port undefined!");
-        }
-
-        if (Cube != null)
-        {
-            videoPlayer = Cube.GetComponent<VideoPlayer>();
-        }
+    void Start() {
+        videoPlayer = GetComponent<VideoPlayer>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (COMPort != "" && Cube != null)
-        {
-            if (serialPort.IsOpen)
-            {
-                try
-                {
-                    string output = serialPort.ReadLine();
-                    if (output != tokenIsPlaced.ToString())
-                    {
-                        switch (output)
-                        {
-                            case "1":
-                                //Debug.Log("Token on Position " + position + " is placed!");
-                                tokenIsPlaced = true;
-                                Cube.SetActive(tokenIsPlaced);
-                                videoPlayer.Play();
-                                if (initialPlacement)
-                                {
-                                    initialPlacement = false;
-                                    InitialTokenAction();
-                                }
-                                else
-                                {
-                                    SpeechRequest();
-                                }
+    void Update() {
+        if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
 
-                                break;
-
-                            case "0":
-                                //Debug.Log("Token on Position " + position + " is removed!");
-                                tokenIsPlaced = false;
-                                Cube.SetActive(tokenIsPlaced);
-                                videoPlayer.Stop();
-                                break;
-
-                            default:
-                                Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
-                                break;
+        try {
+            string output = serialPort.ReadLine();
+            if (output != tokenIsPlaced.ToString()) {
+                switch (output) {
+                    case "1":
+                        //Debug.Log("Token on Position " + position + " is placed!");
+                        tokenIsPlaced = true;
+                        screen.SetActive(true);
+                        videoPlayer.Play();
+                        if (initialPlacement) {
+                            initialPlacement = false;
+                            InitialTokenAction();
+                        } else {
+                            SpeechRequest();
                         }
 
-                    }
+                        break;
+
+                    case "0":
+                        //Debug.Log("Token on Position " + position + " is removed!");
+                        tokenIsPlaced = false;
+                        screen.SetActive(false);
+                        videoPlayer.Stop();
+                        break;
+
+                    default:
+                        Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
+                        break;
                 }
-                catch (System.Exception)
-                {
-                    // Nothing to do here, because else the log would be flooded
-                }
+
             }
+        } catch (System.Exception) {
+            // Nothing to do here, because else the log would be flooded
         }
+
+
     }
 
-    public bool TokenIsPlaced()
-    {
+    public bool InitializeComPort(string comPort) {
+        if (string.IsNullOrEmpty(comPort)) return false;
+
+        COMPort = comPort;
+        serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
+        try {
+            serialPort.Open();
+        } catch (System.Exception) {
+            Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
+            throw;
+        }
+        serialPort.ReadTimeout = 10;
+        return true;
+    }
+
+    public bool TokenIsPlaced() {
         return tokenIsPlaced;
     }
 
     //TODO: implement
-    private void InitialTokenAction()
-    {
+    private void InitialTokenAction() {
         Debug.Log("Hallo du auf Position " + position + "!");
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
     }
 
     //TODO: implement
-    private void SpeechRequest()
-    {
+    private void SpeechRequest() {
         Debug.Log("Redewunsch von Member " + position + ".");
         //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
     }

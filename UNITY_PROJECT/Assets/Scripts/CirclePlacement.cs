@@ -17,11 +17,21 @@ public class CirclePlacement : MonoBehaviour {
 		Vector3 center = transform.position;
 		for (int i = 0; i < numObjects; i++)
 		{
+            // TODO: create moderator
+            if (i == 0){
+                SpawnModerator();
+            }
+
 			var angle = (360 / numObjects) * i;
 			Vector3 pos = GetPosOnCircle(center, Radius, angle);
 			Quaternion rot = Quaternion.FromToRotation(Vector3.zero, Vector3.forward);
 			players.Add(Instantiate(prefab, pos, rot));
-			
+
+            var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+            // TODO: create static list of possible comports and decide which to
+            // use as argument
+            var result = tokenMember.InitializeComPort("");
+
 			players[i].transform.Rotate(new Vector3(0,0,1), 180 - angle);
 			players[i].transform.parent = transform;
 			// TODO: will be different if we use TextMeshPro
@@ -49,6 +59,11 @@ public class CirclePlacement : MonoBehaviour {
 		oldRadius = Radius;
 	}
 	
+
+    void SpawnModerator(){
+        Debug.Log("Create moderator");
+    }
+
 	Vector3 GetPosOnCircle ( Vector3 center ,   float radius, float angle){
 		float ang = angle;
 		Vector3 pos;
