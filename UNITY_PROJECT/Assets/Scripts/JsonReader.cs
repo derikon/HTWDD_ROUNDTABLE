@@ -26,7 +26,7 @@ public class JsonReader : MonoBehaviour
     {
         //var keyArray = jsonDiscussion.keys.ToArray();
         Discussion discussion = new Discussion();
-        List<Member> memberList = null;
+        List<Member> memberList = new List<Member>();
         var keyArray = jsonDiscussion.keys.ToArray();
         Dictionary<string, JSONObject> localMap = new Dictionary<string, JSONObject>();
 
@@ -62,83 +62,95 @@ public class JsonReader : MonoBehaviour
                     {
                         Debug.Log("Got MemberList:");
                         Dictionary<string, JSONObject> localMap2 = new Dictionary<string, JSONObject>();
-                        Member newMember = new Member();
-                        foreach (JSONObject currentMember in localMap[key].list)
+
+                        foreach (var member in localMap[key].list)
                         {
-                            var deepKey = currentMember.keys[0];
-
-                            switch (deepKey)
-                            {
-                                case "name":
-                                    if (currentMember.list[0].type == JSONObject.Type.STRING)
-                                    {
-                                        Debug.Log("Got Title: " + currentMember.list[0]);
-                                        newMember.name = currentMember.list[0].ToString();
-                                    }
-                                    else
-                                    {
-                                        Debug.LogWarning("Case 'name'. STRING expected, but got " + currentMember.list[0].type + "!");
-                                    }
-                                    break;
-
-                                case "title":
-                                    if (currentMember.list[0].type == JSONObject.Type.STRING)
-                                    {
-                                        Debug.Log("Got Title: " + currentMember.list[0]);
-                                        newMember.title = currentMember.list[0].ToString();
-                                    }
-                                    else
-                                    {
-                                        Debug.LogWarning("Case 'title'. STRING expected, but got " + currentMember.list[0].type + "!");
-                                    }
-                                    break;
-
-                                case "description":
-                                    if (currentMember.list[0].type == JSONObject.Type.STRING)
-                                    {
-                                        Debug.Log("Got description: " + currentMember.list[0]);
-                                        newMember.description = currentMember.list[0].ToString();
-                                    }
-                                    else
-                                    {
-                                        Debug.LogWarning("Case 'description'. STRING expected, but got " + currentMember.list[0].type + "!");
-                                    }
-                                    break;
-
-                                case "placeNumber":
-                                    if (currentMember.list[0].type == JSONObject.Type.NUMBER)
-                                    {
-                                        Debug.Log("Got Place Number: " + currentMember.list[0]);
-                                        newMember.placenumber = (int)currentMember.list[0].n;
-                                    }
-                                    else
-                                    {
-                                        Debug.LogWarning("Case 'placeNumber'. STRING expected, but got " + currentMember.list[0].type + "!");
-                                    }
-                                    break;
-                                case "organisation":
-                                    if (currentMember.list[0].type == JSONObject.Type.STRING)
-                                    {
-                                        Debug.Log("Got organisation: " + currentMember.list[0]);
-                                        newMember.organisation = currentMember.list[0].ToString();
-                                    }
-                                    else
-                                    {
-                                        Debug.LogWarning("Case 'role'. STRING expected, but got " + currentMember.list[0].type + "!");
-                                    }
-                                    break;
-                                default:
-                                    Debug.LogWarning("Unkown case! Key: " + deepKey);
-                                    break;
-                            }
+                            memberList.Add(InitializeMember(member));
                         }
-                        memberList.Add(newMember);
-
                     }
                     break;
             }
 
         }
+        discussion.memberList = memberList;
+
         return discussion;
+    }
+
+    private Member InitializeMember(JSONObject obj)
+    {
+        Member newMember = new Member();
+
+        foreach (JSONObject currentMemberInfo in obj.list)
+        {
+            var deepKey = currentMemberInfo.keys[0];
+
+            switch (deepKey)
+            {
+                case "name":
+                    if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
+                    {
+                        Debug.Log("Got Title: " + currentMemberInfo.list[0]);
+                        newMember.name = currentMemberInfo.list[0].ToString();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Case 'name'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
+                    }
+                    break;
+
+                case "title":
+                    if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
+                    {
+                        Debug.Log("Got Title: " + currentMemberInfo.list[0]);
+                        newMember.title = currentMemberInfo.list[0].ToString();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Case 'title'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
+                    }
+                    break;
+
+                case "description":
+                    if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
+                    {
+                        Debug.Log("Got description: " + currentMemberInfo.list[0]);
+                        newMember.description = currentMemberInfo.list[0].ToString();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Case 'description'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
+                    }
+                    break;
+
+                case "placeNumber":
+                    if (currentMemberInfo.list[0].type == JSONObject.Type.NUMBER)
+                    {
+                        Debug.Log("Got Place Number: " + currentMemberInfo.list[0]);
+                        newMember.placenumber = (int)currentMemberInfo.list[0].n;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Case 'placeNumber'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
+                    }
+                    break;
+                case "organisation":
+                    if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
+                    {
+                        Debug.Log("Got organisation: " + currentMemberInfo.list[0]);
+                        newMember.organisation = currentMemberInfo.list[0].ToString();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Case 'role'. STRING expected, but got " + currentMemberInfo.list[0].type + "!");
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Unkown case! Key: " + deepKey);
+                    break;
+            }
+
+        }
+        return newMember;
     }
 }

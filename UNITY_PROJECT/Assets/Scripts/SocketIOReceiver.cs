@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using SocketIO;
 
-public class SocketIOReceiver : MonoBehaviour {
+public class SocketIOReceiver : MonoBehaviour
+{
 
     private SocketIOComponent socket;
 
     public JsonReader JsonReader;
 
     public DiscussionManager DiscussionManager;
-    
-    private void Start() {
+
+    private void Start()
+    {
         if (DiscussionManager == null)
         {
             DiscussionManager = GameObject.FindGameObjectWithTag("DiscussionManager").GetComponent<DiscussionManager>();
         }
-        
+
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
         if (socket == null)
         {
@@ -37,22 +39,26 @@ public class SocketIOReceiver : MonoBehaviour {
     }
 
 
-    void OnOpen(SocketIOEvent e) {
+    void OnOpen(SocketIOEvent e)
+    {
         Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
     }
 
 
-    void OnError(SocketIOEvent e) {
+    void OnError(SocketIOEvent e)
+    {
         Debug.Log("[SocketIO] Error received: " + e.name + " " + e.data);
     }
 
 
-    void OnClose(SocketIOEvent e) {
+    void OnClose(SocketIOEvent e)
+    {
         Debug.Log("[SocketIO] Close received: " + e.name + " " + e.data);
     }
 
 
-    void OnLift(SocketIOEvent e) {
+    void OnLift(SocketIOEvent e)
+    {
         var jsonData = e.data;
         Debug.Log("[SocketIO] lift triggered: " + e.name + " " + jsonData);
     }
@@ -60,7 +66,7 @@ public class SocketIOReceiver : MonoBehaviour {
     void OnNewDiscussion(SocketIOEvent e)
     {
         Discussion discussion = null;
-        JSONObject jsonMessage = (JSONObject) e.data;
+        JSONObject jsonMessage = (JSONObject)e.data;
         var keyArray = jsonMessage.keys.ToArray();
         JSONObject payload = null;
         foreach (var key in keyArray)
@@ -71,14 +77,18 @@ public class SocketIOReceiver : MonoBehaviour {
                 payload = jsonMessage[key];
             }
         }
-        if(payload != null)
+        if (payload != null)
         {
             discussion = JsonReader.onJSONDiscussionReceived(payload);
         }
-       
-        if (discussion != null)
-        {
 
+        if (discussion != null && discussion.memberList != null)
+        {
+            DiscussionManager.OnDiscussionReady(discussion);
+        }
+        else
+        {
+            Debug.LogError("discussion or discussion.memberList is null");
         }
     }
 
@@ -93,7 +103,8 @@ public class SocketIOReceiver : MonoBehaviour {
     }
 
 
-    public void AckToServer() {
+    public void AckToServer()
+    {
         socket.Emit("ack");
     }
 }
