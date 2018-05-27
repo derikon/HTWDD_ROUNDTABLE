@@ -61,7 +61,7 @@ public class JsonReader : MonoBehaviour
                     {
                         Dictionary<string, JSONObject> localMap2 = new Dictionary<string, JSONObject>();
 
-                        foreach (JSONObject currentMember in localMap[key].list)
+                        foreach (JSONObject currentMember in localMap2[key].list)
                         {
                             Member newMember = new Member();
                             var keyArray2 = currentMember.keys.ToArray();
@@ -69,9 +69,11 @@ public class JsonReader : MonoBehaviour
 
                             foreach (var key2 in keyArray2)
                             {
-                                if (!localMap.ContainsKey(key2))
+                                if (!localMap2.ContainsKey(key2))
                                 {
-                                    localMap.Add(key, currentMember[key]);
+                                    //TODO: in neue Methode auslagern
+                                    //      => return newMember;
+                                    localMap2.Add(key, currentMember[key]);
 
                                     switch (key2)
                                     {
@@ -83,7 +85,7 @@ public class JsonReader : MonoBehaviour
                                             }
                                             else
                                             {
-                                                Debug.Log("False Datatype " + localMap2[key2]);
+                                                Debug.LogWarning("Case 'name'. STRING expected, but got " + localMap2[key2].type + "!");
                                             }
                                             break;
 
@@ -96,7 +98,7 @@ public class JsonReader : MonoBehaviour
                                             }
                                             else
                                             {
-                                                Debug.Log("False Datatype " + localMap2[key2]);
+                                                Debug.LogWarning("Case 'title'. STRING expected, but got " + localMap2[key2].type + "!");
                                             }
                                             break;
 
@@ -108,20 +110,23 @@ public class JsonReader : MonoBehaviour
                                             }
                                             else
                                             {
-                                                Debug.Log("False Datatype " + localMap2[key2]);
+                                                Debug.LogWarning("Case 'role'. STRING expected, but got " + localMap2[key2].type + "!");
                                             }
                                             break;
 
-                                        case "placenumber":
+                                        case "placeNumber":
                                             if (localMap2[key2].type == JSONObject.Type.NUMBER)
                                             {
-                                                Debug.Log("Got Duration: " + localMap2[key2]);
-                                                discussion.duration = (int)localMap2[key2].n;
+                                                Debug.Log("Got Place Number: " + localMap2[key2]);
+                                                newMember.placenumber = (int)localMap2[key2].n;
                                             }
                                             else
                                             {
-                                                Debug.Log("False Datatype " + localMap2[key2]);
+                                                Debug.LogWarning("Case 'placeNumber'. STRING expected, but got " + localMap2[key2].type + "!");
                                             }
+                                            break;
+                                        default:
+                                            Debug.LogWarning("Unkown case! Key: " + key2);
                                             break;
                                     }
                                     memberList.Add(newMember);
