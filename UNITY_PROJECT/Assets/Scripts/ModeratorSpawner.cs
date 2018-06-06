@@ -33,7 +33,7 @@ public class ModeratorSpawner : MonoBehaviour
             var player = GameObject.Instantiate(PlayerPrefab, t);
             var videoplayer = GameObject.Instantiate(VideoPlayerPrefab, t);
 
-            arduinoScripts[i - 1].Cube = videoplayer;
+            //arduinoScripts[i - 1].Cube = videoplayer;
 
             // TODO: will be different if we use TextMeshPro
             var textMesh = player.GetComponent<TextMesh>();

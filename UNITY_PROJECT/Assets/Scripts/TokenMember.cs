@@ -4,7 +4,8 @@ using UnityEngine;
 using System.IO.Ports;
 using UnityEngine.Video;
 
-public class TokenMember : MonoBehaviour {
+public class TokenMember : MonoBehaviour
+{
     public GameObject screen;
 
 
@@ -12,16 +13,31 @@ public class TokenMember : MonoBehaviour {
     private bool tokenIsPlaced = false;
 
     private string comPort;
-    public string COMPort {
+    public string COMPort
+    {
         get { return comPort; }
-        set {
+        set
+        {
             if (comPort == value) return;
             comPort = value;
         }
     }
 
+    public int Position
+    {
+        get
+        {
+            return position;
+        }
+
+        set
+        {
+            position = value;
+        }
+    }
+
     [SerializeField]
-    private string position = "";
+    private int position;
     private VideoPlayer videoPlayer;
 
     [SerializeField]
@@ -31,36 +47,44 @@ public class TokenMember : MonoBehaviour {
     private SerialPort serialPort;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         videoPlayer = GetComponent<VideoPlayer>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
 
-        try {
+        try
+        {
             string output = serialPort.ReadLine();
-            if (output != tokenIsPlaced.ToString()) {
-                switch (output) {
+            if (output != tokenIsPlaced.ToString())
+            {
+                switch (output)
+                {
                     case "1":
-                        //Debug.Log("Token on Position " + position + " is placed!");
+                        Debug.Log("Token on Position " + Position + " is placed!");
                         tokenIsPlaced = true;
-                        screen.SetActive(true);
+                        //screen.SetActive(true);
                         videoPlayer.Play();
-                        if (initialPlacement) {
+                        if (initialPlacement)
+                        {
                             initialPlacement = false;
                             InitialTokenAction();
-                        } else {
+                        }
+                        else
+                        {
                             SpeechRequest();
                         }
 
                         break;
 
                     case "0":
-                        //Debug.Log("Token on Position " + position + " is removed!");
+                        Debug.Log("Token on Position " + Position + " is removed!");
                         tokenIsPlaced = false;
-                        screen.SetActive(false);
+                        //screen.SetActive(false);
                         videoPlayer.Stop();
                         break;
 
@@ -70,21 +94,27 @@ public class TokenMember : MonoBehaviour {
                 }
 
             }
-        } catch (System.Exception) {
+        }
+        catch (System.Exception)
+        {
             // Nothing to do here, because else the log would be flooded
         }
 
 
     }
 
-    public bool InitializeComPort(string comPort) {
+    public bool InitializeComPort(string comPort)
+    {
         if (string.IsNullOrEmpty(comPort)) return false;
 
         COMPort = comPort;
         serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
-        try {
+        try
+        {
             serialPort.Open();
-        } catch (System.Exception) {
+        }
+        catch (System.Exception)
+        {
             Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
             throw;
         }
@@ -92,19 +122,22 @@ public class TokenMember : MonoBehaviour {
         return true;
     }
 
-    public bool TokenIsPlaced() {
+    public bool TokenIsPlaced()
+    {
         return tokenIsPlaced;
     }
 
     //TODO: implement
-    private void InitialTokenAction() {
-        Debug.Log("Hallo du auf Position " + position + "!");
+    private void InitialTokenAction()
+    {
+        Debug.Log("Hallo du auf Position " + Position + "!");
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
     }
 
     //TODO: implement
-    private void SpeechRequest() {
-        Debug.Log("Redewunsch von Member " + position + ".");
+    private void SpeechRequest()
+    {
+        Debug.Log("Redewunsch von Member " + Position + ".");
         //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
     }
 }

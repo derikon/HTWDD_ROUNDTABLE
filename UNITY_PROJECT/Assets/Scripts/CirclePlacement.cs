@@ -13,6 +13,9 @@ public class CirclePlacement : MonoBehaviour
     private float oldRadius;
     private DiscussionManager discussionManager;
 
+    COMPortConf comPortConf = new COMPortConf();
+
+
     void Start()
     {
         // find discussion manager
@@ -22,20 +25,28 @@ public class CirclePlacement : MonoBehaviour
         for (int i = 0; i < numObjects; i++)
         {
             // TODO: create moderator
-            if (i == 0)
-            {
-                SpawnModerator();
-            }
+
 
             var angle = (360 / numObjects) * i;
             Vector3 pos = GetPosOnCircle(center, Radius, angle);
             Quaternion rot = Quaternion.FromToRotation(Vector3.zero, Vector3.forward);
             players.Add(Instantiate(prefab, pos, rot));
 
-            var tokenMember = players[i].GetComponentInChildren<TokenMember>();
-            // TODO: create static list of possible comports and decide which to
-            // use as argument
-            var result = tokenMember.InitializeComPort("");
+            if (i == 0)
+            {
+                SpawnModerator();
+                var tokenModerator = players[i].GetComponentInChildren<TokenModerator>();
+                tokenModerator.Position = i;
+                var resultMod = tokenModerator.InitializeComPort(comPortConf.COMPosMod);
+            }
+            else
+            {
+                var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+                tokenMember.Position = i;
+                // TODO: create static list of possible comports and decide which to
+                // use as argument
+                var resultMem = tokenMember.InitializeComPort(comPortConf.comPortArray[i - 1]);
+            }
 
             players[i].transform.Rotate(new Vector3(0, 0, 1), 180 - angle);
             players[i].transform.parent = transform;
@@ -81,5 +92,25 @@ public class CirclePlacement : MonoBehaviour
         pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         pos.z = center.z;
         return pos;
+    }
+}
+
+public class COMPortConf
+{
+    //TODO: COM Ports definieren
+    public String[] comPortArray = { "", "", "", "", "" };
+    private string cOMPosMod = "11";
+
+    public string COMPosMod
+    {
+        get
+        {
+            return cOMPosMod;
+        }
+
+        set
+        {
+            cOMPosMod = value;
+        }
     }
 }

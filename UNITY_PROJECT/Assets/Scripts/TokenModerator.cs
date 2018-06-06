@@ -6,99 +6,109 @@ using UnityEngine.Video;
 
 public class TokenModerator : MonoBehaviour
 {
+    public GameObject screen;
+
     [SerializeField]
     private bool tokenIsPlaced = false;
-    [SerializeField]
-    private string COMPort = "";
-    [SerializeField]
-    private string position = "";
-    private GameObject cube;
-    private VideoPlayer videoPlayer;
 
-    // supported baudrate is 9600
-    private SerialPort serialPort;
+    private string comPort;
+    public string COMPort
+    {
+        get { return comPort; }
+        set
+        {
+            if (comPort == value) return;
+            comPort = value;
+        }
+    }
 
-    public GameObject Cube
+    public int Position
     {
         get
         {
-            return cube;
+            return position;
         }
 
         set
         {
-            cube = value;
+            position = value;
         }
     }
+
+    [SerializeField]
+    private int position;
+    private VideoPlayer videoPlayer;
+
+    [SerializeField]
+    private bool initialPlacement = true;
+
+    // supported baudrate is 9600
+    private SerialPort serialPort;
+
 
     // Use this for initialization
     void Start()
     {
-        if (COMPort != "")
-        {
-            serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
-            try
-            {
-                serialPort.Open();
-            }
-            catch (System.Exception)
-            {
-                Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
-                throw;
-            }
-            serialPort.ReadTimeout = 10;
-        }
-        else
-        {
-            Debug.LogError("Port undefined!");
-        }
-
-        if (Cube != null)
-        {
-            videoPlayer = Cube.GetComponent<VideoPlayer>();
-        }
+        videoPlayer = GetComponent<VideoPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (COMPort != "" && Cube != null)
+        if (string.IsNullOrEmpty(COMPort) || serialPort.IsOpen) return;
+
+        try
         {
-            if (serialPort.IsOpen)
+            string output = serialPort.ReadLine();
+            if (output != tokenIsPlaced.ToString())
             {
-                try
+                switch (output)
                 {
-                    string output = serialPort.ReadLine();
-                    if (output != tokenIsPlaced.ToString())
-                    {
-                        switch (output)
-                        {
-                            case "1":
-                                tokenIsPlaced = true;
-                                Cube.SetActive(tokenIsPlaced);
-                                BuzzerAction();
-                                videoPlayer.Play();
-                                break;
+                    case "1":
+                        tokenIsPlaced = true;
+                        //screen.SetActive(true);
+                        //Cube.SetActive(tokenIsPlaced);
+                        BuzzerAction();
+                        videoPlayer.Play();
+                        break;
 
-                            case "0":
-                                tokenIsPlaced = false;
-                                Cube.SetActive(tokenIsPlaced);
-                                videoPlayer.Stop();
-                                break;
+                    case "0":
+                        tokenIsPlaced = false;
+                        //screen.SetActive(false);
+                        //Cube.SetActive(tokenIsPlaced);
+                        videoPlayer.Stop();
+                        break;
 
-                            default:
-                                Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
-                                break;
-                        }
-
-                    }
+                    default:
+                        Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
+                        break;
                 }
-                catch (System.Exception)
-                {
-                    // Nothing to do here, because else the log would be flooded
-                }
+
             }
         }
+        catch (System.Exception)
+        {
+            // Nothing to do here, because else the log would be flooded
+        }
+    }
+
+    public bool InitializeComPort(string comPort)
+    {
+        if (string.IsNullOrEmpty(comPort)) return false;
+
+        COMPort = comPort;
+        serialPort = new SerialPort("\\\\.\\COM" + 11, 9600);
+        try
+        {
+            serialPort.Open();
+        }
+        catch (System.Exception)
+        {
+            Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
+            throw;
+        }
+        serialPort.ReadTimeout = 10;
+        return true;
     }
 
     public bool TokenIsPlaced()
