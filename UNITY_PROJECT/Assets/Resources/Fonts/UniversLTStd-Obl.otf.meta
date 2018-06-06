@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 43e7f18a122f54bf6b4e871e1f8ec8f1
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Univers LT Std
+  fontNames:
+  - Univers LT Std
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2123df102bc694c43befb0492c080ef9, type: 3}
+  - {fileID: 12800000, guid: 2b13dff4a4a3e4e5a80866b13a2e7548, type: 3}
+  - {fileID: 12800000, guid: 34cd4f96635df4854993a23451dbfa12, type: 3}
+  - {fileID: 12800000, guid: 2df791a60a7b541129ce19f9aeadfc19, type: 3}
+  - {fileID: 12800000, guid: 03f517e84fad74bfcb6d5020f8eb5851, type: 3}
+  - {fileID: 12800000, guid: 33b09edcbe79d4869a2e2349af2de41e, type: 3}
+  - {fileID: 12800000, guid: 1cfb26ec860194b1994128f3f9aa6dbc, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
