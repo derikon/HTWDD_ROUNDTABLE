@@ -6,7 +6,7 @@ public class MicManager : MonoBehaviour
 {
     private List<string> microphones = new List<string>();
 
-    public int RECORDING_DURATION = 100;
+    public int RECORDING_DURATION = 1;
 
     // Use this for initialization
     void Start()
@@ -18,7 +18,7 @@ public class MicManager : MonoBehaviour
             Debug.Log("MIC: " + microphone);
         }
 
-        // find all players and objects who is interested into MIC inputs
+        // find all players and objects who are interested into MIC inputs
         var audioReceivers = GameObject.FindGameObjectsWithTag("Player");
         if (audioReceivers.Length == 0)
         {
@@ -51,7 +51,28 @@ public class MicManager : MonoBehaviour
 
             audioComponent.clip =
                 Microphone.Start(microphone, true, RECORDING_DURATION, AudioSettings.outputSampleRate);
-            audioComponent.Play();
+
+            Debug.Log(Microphone.IsRecording(microphone).ToString());
+
+            if (Microphone.IsRecording(microphone))
+            { //check that the mic is recording, otherwise you'll get stuck in an infinite loop waiting for it to start
+                while (!(Microphone.GetPosition(microphone) > 0))
+                {
+                } // Wait until the recording has started. 
+
+                Debug.Log("recording started with " + microphone);
+
+                // Start playing the audio source
+                audioComponent.Play();
+            }
+            else
+            {
+                //microphone doesn't work for some reason
+
+                Debug.Log(microphone + " doesn't work!");
+            }
+
+            //audioComponent.Play();
         }
 
 
