@@ -42,10 +42,15 @@ public class CirclePlacement : MonoBehaviour
             else
             {
                 var tokenMember = players[i].GetComponentInChildren<TokenMember>();
-                tokenMember.Position = i;
                 // TODO: create static list of possible comports and decide which to
                 // use as argument
                 var resultMem = tokenMember.InitializeComPort(comPortConf.comPortArray[i - 1]);
+                tokenMember.Position = i;
+                // Add MicController
+                var micController = players[i].GetComponentInChildren<MicControlC>();
+                micController.SetDeviceSlot = true;
+                micController.InputDevice = i - 1;
+                micController.enableSpectrumData = true;
             }
 
             players[i].transform.Rotate(new Vector3(0, 0, 1), 180 - angle);
@@ -99,7 +104,7 @@ public class COMPortConf
 {
     //TODO: COM Ports definieren
     public String[] comPortArray = { "", "", "", "", "" };
-    private string cOMPosMod = "11";
+    private string cOMPosMod = "";
 
     public string COMPosMod
     {

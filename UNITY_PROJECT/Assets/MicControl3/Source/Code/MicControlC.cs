@@ -45,7 +45,7 @@ public class MicControlC : MonoBehaviour
 
 
     //settings
-    public float sensitivity = 500.0f;
+    public float sensitivity = 120.0f;
     public Vector2 minMaxSensitivity = new Vector2(0.0f, 500.0f);
 
     public int bufferTime = 1;
