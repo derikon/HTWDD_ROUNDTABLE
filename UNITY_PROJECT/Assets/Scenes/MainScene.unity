@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tokenIsPlaced: 0
-  COMPort: 21
+  COMPort: 15
   position: Moderator
 --- !u!1 &256190244
 GameObject:
@@ -532,7 +532,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tokenIsPlaced: 0
-  COMPort: 
   position: 
   initialPlacement: 1
 --- !u!1 &783905363
@@ -719,7 +718,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tokenIsPlaced: 0
-  COMPort: 22
   position: 2
   initialPlacement: 1
 --- !u!1 &1043976269
@@ -1020,7 +1018,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tokenIsPlaced: 0
-  COMPort: 
   position: 1
   initialPlacement: 1
 --- !u!1 &1188134157
@@ -1064,7 +1061,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tokenIsPlaced: 0
-  COMPort: 
   position: 
   initialPlacement: 1
 --- !u!1 &1464668679
@@ -1136,7 +1132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tokenIsPlaced: 0
-  COMPort: 
   position: 
   initialPlacement: 1
 --- !u!1 &1725166444

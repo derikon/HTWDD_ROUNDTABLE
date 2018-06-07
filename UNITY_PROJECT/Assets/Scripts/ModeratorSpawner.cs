@@ -25,6 +25,7 @@ public class ModeratorSpawner : MonoBehaviour
 
         var transforms = ModeratorPositionsHolder.GetComponentsInChildren<Transform>();
         var arduinoScripts = ModeratorPositionsHolder.GetComponentsInChildren<TokenModerator>();
+        arduinoScripts[0].COMPort = "15";
 
         // start from i=1 to exclude the parent object itself
         for (var i = 1; i < transforms.Length; i++)

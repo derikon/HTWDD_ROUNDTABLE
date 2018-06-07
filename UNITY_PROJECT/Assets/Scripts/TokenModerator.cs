@@ -8,8 +8,8 @@ public class TokenModerator : MonoBehaviour
 {
     [SerializeField]
     private bool tokenIsPlaced = false;
-    [SerializeField]
-    private string COMPort = "";
+    //[SerializeField]
+    public string COMPort = "15";
     [SerializeField]
     private string position = "";
     private GameObject cube;
@@ -73,14 +73,14 @@ public class TokenModerator : MonoBehaviour
                     {
                         switch (output)
                         {
-                            case "1":
+                            case "true":
                                 tokenIsPlaced = true;
                                 Cube.SetActive(tokenIsPlaced);
                                 BuzzerAction();
                                 videoPlayer.Play();
                                 break;
 
-                            case "0":
+                            case "false":
                                 tokenIsPlaced = false;
                                 Cube.SetActive(tokenIsPlaced);
                                 videoPlayer.Stop();

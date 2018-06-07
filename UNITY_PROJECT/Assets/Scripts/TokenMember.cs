@@ -56,7 +56,7 @@ public class TokenMember : MonoBehaviour
             catch (System.Exception)
             {
                 Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
-                throw;
+                //throw;
             }
             serialPort.ReadTimeout = 10;
         }
