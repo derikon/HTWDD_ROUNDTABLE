@@ -36,7 +36,7 @@ public class MicVisualizer : MonoBehaviour
             //    sampleCount += 2;
             //}
 
-            Debug.Log("SampleCount: " + sampleCount);
+            //Debug.Log("SampleCount: " + sampleCount);
 
             for (int j = 0; j < sampleCount; j++)
             {

@@ -55,7 +55,7 @@ public class TokenModerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (string.IsNullOrEmpty(COMPort) || serialPort.IsOpen) return;
+        if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
 
         try
         {
@@ -97,7 +97,7 @@ public class TokenModerator : MonoBehaviour
         if (string.IsNullOrEmpty(comPort)) return false;
 
         COMPort = comPort;
-        serialPort = new SerialPort("\\\\.\\COM" + 11, 9600);
+        serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
         try
         {
             serialPort.Open();
