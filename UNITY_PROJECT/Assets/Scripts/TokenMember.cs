@@ -115,14 +115,14 @@ public class TokenMember : MonoBehaviour
         try
         {
             serialPort.Open();
+            serialPort.ReadTimeout = 10;
+            return true;
         }
         catch (System.Exception)
         {
             Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
-            throw;
+            return false;
         }
-        serialPort.ReadTimeout = 10;
-        return true;
     }
 
     public bool TokenIsPlaced()

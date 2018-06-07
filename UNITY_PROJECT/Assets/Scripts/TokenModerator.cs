@@ -70,7 +70,6 @@ public class TokenModerator : MonoBehaviour
                 switch (output)
                 {
                     case "true":
-                        Debug.Log("Output-Mod:" + output);
                         tokenIsPlaced = true;
                         //screen.SetActive(true);
                         //Cube.SetActive(tokenIsPlaced);
@@ -79,7 +78,6 @@ public class TokenModerator : MonoBehaviour
                         break;
 
                     case "false":
-                        Debug.Log("Output-Mod:" + output);
                         tokenIsPlaced = false;
                         //screen.SetActive(false);
                         //Cube.SetActive(tokenIsPlaced);
