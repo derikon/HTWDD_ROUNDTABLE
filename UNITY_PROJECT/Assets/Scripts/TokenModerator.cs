@@ -74,16 +74,20 @@ public class TokenModerator : MonoBehaviour
                         switch (output)
                         {
                             case "true":
+                                Debug.Log("Output: " + output);
                                 tokenIsPlaced = true;
                                 Cube.SetActive(tokenIsPlaced);
                                 BuzzerAction();
                                 videoPlayer.Play();
+
                                 break;
 
                             case "false":
+                                Debug.Log("Output: " + output);
                                 tokenIsPlaced = false;
                                 Cube.SetActive(tokenIsPlaced);
                                 videoPlayer.Stop();
+
                                 break;
 
                             default:

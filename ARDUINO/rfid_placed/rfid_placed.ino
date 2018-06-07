@@ -38,11 +38,21 @@ void loop() {
     if(mfrc522.uid.size < 1) {
       if(initialized == true){
         if(previousNotNull != notNull){
-          Serial.println(notNull);
+          if(notNull) {
+            Serial.println("true");
+          } else {
+            Serial.println("false");
+          }
+          //Serial.println(notNull);
           previousNotNull = notNull;
         }        
       } else {
-        Serial.println(notNull);
+        if(notNull) {
+            Serial.println("true");
+          } else {
+            Serial.println("false");
+          }
+        //Serial.println(notNull);
         initialized = true;     
         previousNotNull = notNull;
       }
@@ -65,7 +75,12 @@ void loop() {
     
     if(initialized == true){
       if(previousNotNull != notNull){
-        Serial.println(notNull);
+        if(notNull) {
+            Serial.println("true");
+          } else {
+            Serial.println("false");
+          }
+        //Serial.println(notNull);
         previousNotNull = notNull;
       }        
     } else {       
