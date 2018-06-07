@@ -55,6 +55,10 @@ public class TokenModerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (serialPort == null)
+            return;
+
+
         if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen)
             return;
 
@@ -66,6 +70,7 @@ public class TokenModerator : MonoBehaviour
                 switch (output)
                 {
                     case "true":
+                        Debug.Log("Output-Mod:" + output);
                         tokenIsPlaced = true;
                         //screen.SetActive(true);
                         //Cube.SetActive(tokenIsPlaced);
@@ -74,6 +79,7 @@ public class TokenModerator : MonoBehaviour
                         break;
 
                     case "false":
+                        Debug.Log("Output-Mod:" + output);
                         tokenIsPlaced = false;
                         //screen.SetActive(false);
                         //Cube.SetActive(tokenIsPlaced);
