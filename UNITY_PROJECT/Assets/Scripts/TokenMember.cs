@@ -68,7 +68,6 @@ public class TokenMember : MonoBehaviour
                 switch (output)
                 {
                     case "true":
-                        Debug.Log("Output-Mem:" + output);
                         Debug.Log("Token on Position " + Position + " is placed!");
                         tokenIsPlaced = true;
                         //screen.SetActive(true);
@@ -86,7 +85,6 @@ public class TokenMember : MonoBehaviour
                         break;
 
                     case "false":
-                        Debug.Log("Output-Mem:" + output);
                         Debug.Log("Token on Position " + Position + " is removed!");
                         tokenIsPlaced = false;
                         //screen.SetActive(false);

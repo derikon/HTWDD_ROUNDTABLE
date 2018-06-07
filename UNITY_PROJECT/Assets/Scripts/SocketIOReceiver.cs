@@ -32,8 +32,8 @@ public class SocketIOReceiver : MonoBehaviour
         socket.On("start_discussion", OnStartDiscussion);
         socket.On("end_discussion", OnEndDiscussion);
         //socket.On("remaining_time", OnRemainingTime);
-        //socket.On("start_pause", OnStartPause);
-        //socket.On("end_pause", OnEndPause);
+        socket.On("start_pause", OnStartPause);
+        socket.On("end_pause", OnEndPause);
         //socket.On("topic", OnTopic);
         //socket.On("silence", OnSilence);
     }
@@ -100,6 +100,18 @@ public class SocketIOReceiver : MonoBehaviour
     void OnEndDiscussion(SocketIOEvent e)
     {
         Debug.Log("[SocketIO] End Discussion Triggered");
+    }
+
+    void OnStartPause(SocketIOEvent e)
+    {
+        Debug.Log("[SocketIO] Start Pause Triggered");
+        DiscussionManager.OnStartPause();
+    }
+
+    void OnEndPause(SocketIOEvent e)
+    {
+        Debug.Log("[SocketIO] End Pause Triggered");
+        DiscussionManager.OnEndPause();
     }
 
 
