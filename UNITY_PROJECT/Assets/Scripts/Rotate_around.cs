@@ -7,10 +7,9 @@ using UnityEngine;
 public class Rotate_around : MonoBehaviour
 {
     public GameObject cube;
-    public float fireRate = 5.0f;
-    private float nextFire = 0.0f;
-    public float smooth = 1f;
     public float speed;
+
+
 
     private Vector3 targetAngles;
     private int i = 0;
@@ -24,11 +23,14 @@ public class Rotate_around : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextFire)
-        {
-            transform.RotateAround(cube.transform.position, new Vector3(0.0f, 0.0f, 0.1f), 100 * Time.deltaTime * speed);
-            nextFire = Time.time - fireRate;
-        }
+        //while (this.transform.rotation.z < 180)
+        //{
+        //    this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(0, 0, 180), speed * Time.deltaTime);
+        //    yield return null;
+        //}
+        //this.transform.rotation = Quaternion.Euler(0, 0, 180);
+        transform.RotateAround(cube.transform.position, new Vector3(0.0f, 0.0f, 0.1f), 100 * Time.deltaTime * speed);
+
 
         //if (Input.GetKeyDown(KeyCode.S)) // some condition to rotate 180
 

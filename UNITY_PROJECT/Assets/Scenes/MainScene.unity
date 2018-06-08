@@ -492,8 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 1431128218}
-  fireRate: 0.5
-  smooth: 1
+  speed: 1000
 --- !u!102 &921269098
 TextMesh:
   serializedVersion: 3
