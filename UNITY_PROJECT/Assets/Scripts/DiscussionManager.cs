@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class DiscussionManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class DiscussionManager : MonoBehaviour
         {
             TabletText = GameObject.FindGameObjectWithTag("TabletText").GetComponent<Text>();
         }
+    }
+
+    private void Update()
+    {
     }
 
     public void FindAllPlayers()
@@ -40,11 +45,13 @@ public class DiscussionManager : MonoBehaviour
     {
         discussionObject.SetActive(false);
         pauseObject.SetActive(true);
+        pauseObject.GetComponent<VideoPlayer>().Play();
     }
 
     public void OnEndPause()
     {
         pauseObject.SetActive(false);
         discussionObject.SetActive(true);
+        pauseObject.GetComponent<VideoPlayer>().Stop();
     }
 }
