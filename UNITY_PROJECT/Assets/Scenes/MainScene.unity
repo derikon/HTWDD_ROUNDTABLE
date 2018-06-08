@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 1431128218}
-  speed: 1000
+  speed: 0.1
 --- !u!102 &921269098
 TextMesh:
   serializedVersion: 3
@@ -500,7 +500,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921269095}
-  m_Text: Player
+  m_Text: Topic
   m_OffsetZ: 0
   m_CharacterSize: 0.5
   m_LineSpacing: 1
