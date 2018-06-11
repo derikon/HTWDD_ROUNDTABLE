@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
 
 public class ParticleModifier : MonoBehaviour {
 
@@ -10,7 +9,8 @@ public class ParticleModifier : MonoBehaviour {
     private ParticleSystem.MinMaxGradient defaultGradient;
     private Gradient actionGradient;
 
-	void Start () {
+    
+	private void Start () {
         this.particleSystem = GetComponent<ParticleSystem>();
         this.colorModifier = this.particleSystem.colorOverLifetime;
         this.noiseModifier = this.particleSystem.noise;
@@ -23,16 +23,14 @@ public class ParticleModifier : MonoBehaviour {
 	}
 	
 
-	void Update () {
+	private void Update () {
         if (Input.GetKey(KeyCode.P)) {
             this.noiseModifier.positionAmount = .2f;
-
-
-            //colorModifier.color = this.actionGradient;
+            this.colorModifier.color = this.actionGradient;
 
         } else {
             this.noiseModifier.positionAmount = 0f;
-            //this.colorModifier.color = this.defaultGradient;
+            this.colorModifier.color = this.defaultGradient;
         }
 	}
 }
