@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 23516419625735114}
   - component: {fileID: 102439137201076198}
   - component: {fileID: 210401397010821550}
+  - component: {fileID: 114140568761176200}
   m_Layer: 0
   m_Name: PlayerName
   m_TagString: PlayerName
@@ -1126,6 +1127,19 @@ MonoBehaviour:
   Band: 2
   StartScale: 0.1
   ScaleMultiplier: 1
+--- !u!114 &114140568761176200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792937173992596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f7a54b396c8a7478590c892fc0cdea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cube: {fileID: 1579207600010454}
+  speed: 0
 --- !u!114 &114163644241050666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1390,7 +1404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1828449, y: -4.9817147}
+  m_AnchoredPosition: {x: 7.89, y: -3.73}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &328167957863603692
