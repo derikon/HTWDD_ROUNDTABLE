@@ -32,16 +32,17 @@ public class CirclePlacement : MonoBehaviour
             Quaternion rot = Quaternion.FromToRotation(Vector3.zero, Vector3.forward);
             players.Add(Instantiate(prefab, pos, rot));
 
+            var tokenModerator = players[i].GetComponentInChildren<TokenModerator>();
+            var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+
             if (i == 0)
             {
                 SpawnModerator();
-                var tokenModerator = players[i].GetComponentInChildren<TokenModerator>();
                 tokenModerator.Position = i;
                 var resultMod = tokenModerator.InitializeComPort(comPortConf.COMPosMod);
             }
             else
             {
-                var tokenMember = players[i].GetComponentInChildren<TokenMember>();
                 // TODO: create static list of possible comports and decide which to
                 // use as argument
                 var resultMem = tokenMember.InitializeComPort(comPortConf.comPortArray[i - 1]);
@@ -57,6 +58,7 @@ public class CirclePlacement : MonoBehaviour
             players[i].transform.parent = transform;
             // TODO: will be different if we use TextMeshPro
             var textMesh = players[i].GetComponent<TextMesh>();
+            tokenMember.textmesh = textMesh;
             if (textMesh != null)
             {
                 textMesh.text = "Player " + i;

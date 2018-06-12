@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class TokenMember : MonoBehaviour
 {
     public GameObject screen;
+    public TextMesh textmesh;
 
 
     [SerializeField]
@@ -135,6 +136,7 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
+        StartCoroutine(RotateMe());
     }
 
     //TODO: implement
@@ -142,5 +144,19 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Redewunsch von Member " + Position + ".");
         //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
+    }
+
+    IEnumerator RotateMe()
+    {
+
+        float moveSpeed = 0.1f;
+        while (this.transform.rotation.z > 0)
+        {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(0, 0, 0), moveSpeed * Time.time);
+            yield return null;
+        }
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        yield return null;
     }
 }
