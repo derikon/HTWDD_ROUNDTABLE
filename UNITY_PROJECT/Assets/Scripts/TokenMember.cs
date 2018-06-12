@@ -40,6 +40,7 @@ public class TokenMember : MonoBehaviour
     private int position;
     [SerializeField]
     private VideoPlayer videoPlayer;
+    VoiceParticleSystem voiceParticleSystem;
 
     [SerializeField]
     private bool initialPlacement = true;
@@ -51,7 +52,7 @@ public class TokenMember : MonoBehaviour
     void Start()
     {
         videoPlayer = GetComponentInChildren<VideoPlayer>();
-        //screen = GameObject.FindGameObjectWithTag("Screen");
+        voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
     // Update is called once per frame
@@ -61,6 +62,7 @@ public class TokenMember : MonoBehaviour
             return;
 
         if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
+
 
         try
         {
@@ -72,7 +74,7 @@ public class TokenMember : MonoBehaviour
                     case "true":
                         Debug.Log("Token on Position " + Position + " is placed!");
                         tokenIsPlaced = true;
-                        videoPlayer.Play();
+                        //videoPlayer.Play();
                         if (initialPlacement)
                         {
                             Debug.Log("INITIAL PLACEMENT ON POS " + Position);
@@ -89,8 +91,8 @@ public class TokenMember : MonoBehaviour
                     case "false":
                         Debug.Log("Token on Position " + Position + " is removed!");
                         tokenIsPlaced = false;
-                        //screen.SetActive(false);
-                        videoPlayer.Stop();
+                        //videoPlayer.Stop();
+                        screen.GetComponent<FadeInOut>().FadeIn();
                         break;
 
                     default:
@@ -137,7 +139,7 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
         screen.GetComponent<FadeInOut>().FadeOut();
-        GetComponent<VoiceParticleSystem>().enabled = true;
+        voiceParticleSystem.enabled = true;
         //screen.active = false;
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
     }
@@ -146,6 +148,8 @@ public class TokenMember : MonoBehaviour
     private void SpeechRequest()
     {
         Debug.Log("Redewunsch von Member " + Position + ".");
+        screen.GetComponent<FadeInOut>().FadeOut();
+
         //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
     }
 }
