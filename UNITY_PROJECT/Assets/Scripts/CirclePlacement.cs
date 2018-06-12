@@ -57,11 +57,15 @@ public class CirclePlacement : MonoBehaviour
             players[i].transform.Rotate(new Vector3(0, 0, 1), 180 - angle);
             players[i].transform.parent = transform;
             // TODO: will be different if we use TextMeshPro
-            var textMesh = players[i].GetComponent<TextMesh>();
-            tokenMember.textmesh = textMesh;
+            var textMesh = players[i].GetComponentsInChildren<TextMesh>();
+            //tokenMember.textmesh = textMesh;
             if (textMesh != null)
             {
-                textMesh.text = "Player " + i;
+                foreach (var tm in textMesh)
+                {
+                    tm.text = "Player " + i;
+                }
+                //textMesh.text = "Player " + i;
             }
         }
 

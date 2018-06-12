@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,14 +24,22 @@ public class DiscussionManager : MonoBehaviour
     {
         if (discussionMembers != null && discussionMembers.Count > 0) return;
 
-        discussionMembers.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        discussionMembers.AddRange(GameObject.FindGameObjectsWithTag("PlayerName"));
     }
 
     public void OnDiscussionReady(Discussion discussion)
     {
-        for (int i = 0; i < discussion.memberList.Count; i++)
+        for (int i = 0; i <= discussion.memberList.Count; i++)
         {
-            discussionMembers[i].GetComponent<TextMesh>().text = discussion.memberList[i].name;
+            //discussionMembers[i].GetComponent<TextMesh>().text = discussion.memberList[i].name;
+            if (i == 0)
+            {
+                discussionMembers[i].GetComponentInChildren<TextMesh>().text = "Moderator";
+            }
+            else
+            {
+                discussionMembers[i].GetComponentInChildren<TextMesh>().text = discussion.memberList[i - 1].name;
+            }
         }
     }
 
