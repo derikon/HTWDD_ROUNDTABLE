@@ -8,6 +8,7 @@ TagManager:
   - DiscussionManager
   - Discussion
   - Buzzer_BG
+  - Screen
   layers:
   - Default
   - TransparentFX

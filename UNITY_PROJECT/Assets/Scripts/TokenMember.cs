@@ -38,6 +38,7 @@ public class TokenMember : MonoBehaviour
 
     [SerializeField]
     private int position;
+    [SerializeField]
     private VideoPlayer videoPlayer;
 
     [SerializeField]
@@ -49,7 +50,8 @@ public class TokenMember : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        videoPlayer = GetComponent<VideoPlayer>();
+        videoPlayer = GetComponentInChildren<VideoPlayer>();
+        //screen = GameObject.FindGameObjectWithTag("Screen");
     }
 
     // Update is called once per frame
@@ -70,10 +72,10 @@ public class TokenMember : MonoBehaviour
                     case "true":
                         Debug.Log("Token on Position " + Position + " is placed!");
                         tokenIsPlaced = true;
-                        //screen.SetActive(true);
                         videoPlayer.Play();
                         if (initialPlacement)
                         {
+                            Debug.Log("INITIAL PLACEMENT ON POS " + Position);
                             initialPlacement = false;
                             InitialTokenAction();
                         }
@@ -134,6 +136,9 @@ public class TokenMember : MonoBehaviour
     private void InitialTokenAction()
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
+        screen.GetComponent<FadeInOut>().FadeOut();
+        GetComponent<VoiceParticleSystem>().enabled = true;
+        //screen.active = false;
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
     }
 

@@ -70,6 +70,8 @@ public class TokenModerator : MonoBehaviour
             BuzzerAction();
         }
 
+        if (buzzer_bg == null) return;
+
         if ((DateTime.Now).Subtract(triggerTime) > timeSpan && buzzer_bg.GetComponent<FadeInOut>().isFadedOut == false)
         {
             buzzer_bg.GetComponent<FadeInOut>().FadeOut();
