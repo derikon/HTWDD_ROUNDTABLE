@@ -39,6 +39,7 @@ public class TokenMember : MonoBehaviour
     [SerializeField]
     private int position;
     private VideoPlayer videoPlayer;
+    public VideoClip[] videoClips;
 
     [SerializeField]
     private bool initialPlacement = true;
@@ -50,11 +51,20 @@ public class TokenMember : MonoBehaviour
     void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
+
+        videoPlayer.clip = videoClips[0];
+        videoPlayer.Prepare();
+        videoPlayer.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp("down"))
+        {
+            InitialTokenAction();
+        }
+
         if (serialPort == null)
             return;
 
@@ -134,6 +144,7 @@ public class TokenMember : MonoBehaviour
     private void InitialTokenAction()
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
+        videoPlayer.clip = videoClips[1];
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Video;
 
 public class CirclePlacement : MonoBehaviour
 {
@@ -34,18 +35,28 @@ public class CirclePlacement : MonoBehaviour
 
             if (i == 0)
             {
+                // Deactivate MemberScript
+                var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+                tokenMember.enabled = false;
+
                 SpawnModerator();
                 var tokenModerator = players[i].GetComponentInChildren<TokenModerator>();
                 tokenModerator.Position = i;
                 var resultMod = tokenModerator.InitializeComPort(comPortConf.COMPosMod);
+
             }
             else
             {
-                var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+                // Deactivate ModeratorScript
+                var tokenModerator = players[i].GetComponentInChildren<TokenModerator>();
+                tokenModerator.enabled = false;
+
                 // TODO: create static list of possible comports and decide which to
                 // use as argument
+                var tokenMember = players[i].GetComponentInChildren<TokenMember>();
                 var resultMem = tokenMember.InitializeComPort(comPortConf.comPortArray[i - 1]);
                 tokenMember.Position = i;
+
                 // Add MicController
                 var micController = players[i].GetComponentInChildren<MicControlC>();
                 micController.SetDeviceSlot = true;

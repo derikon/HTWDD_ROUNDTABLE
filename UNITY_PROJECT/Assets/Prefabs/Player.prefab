@@ -1164,6 +1164,9 @@ MonoBehaviour:
   screen: {fileID: 1579207600010454}
   tokenIsPlaced: 0
   position: 0
+  videoClips:
+  - {fileID: 32900000, guid: 21ccbcd3be8f088469f4d5ee5e22f285, type: 3}
+  - {fileID: 32900000, guid: 7a46a7f97434c9245bf21a603dac147f, type: 3}
   initialPlacement: 1
 --- !u!114 &114483336683617300
 MonoBehaviour:
@@ -1179,6 +1182,7 @@ MonoBehaviour:
   screen: {fileID: 0}
   tokenIsPlaced: 0
   position: 0
+  videoClips: []
   initialPlacement: 1
 --- !u!114 &114488508058078790
 MonoBehaviour:
@@ -1322,7 +1326,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357446330044924}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 21ccbcd3be8f088469f4d5ee5e22f285, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
