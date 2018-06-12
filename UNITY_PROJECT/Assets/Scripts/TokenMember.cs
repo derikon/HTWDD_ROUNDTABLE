@@ -40,6 +40,8 @@ public class TokenMember : MonoBehaviour
     private int position;
     [SerializeField]
     private VideoPlayer videoPlayer;
+    public VideoClip[] videoClips;
+
     VoiceParticleSystem voiceParticleSystem;
 
     [SerializeField]
@@ -51,7 +53,10 @@ public class TokenMember : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        videoPlayer = GetComponentInChildren<VideoPlayer>();
+        videoPlayer = screen.GetComponentInParent<VideoPlayer>();
+        videoPlayer.isLooping = true;
+        videoPlayer.clip = videoClips[2];
+        videoPlayer.Play();
         voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
@@ -91,8 +96,11 @@ public class TokenMember : MonoBehaviour
                     case "false":
                         Debug.Log("Token on Position " + Position + " is removed!");
                         tokenIsPlaced = false;
-                        //videoPlayer.Stop();
-                        screen.GetComponent<FadeInOut>().FadeIn();
+                        videoPlayer.Stop();
+                        videoPlayer.targetTexture.Release();
+                        videoPlayer.clip = videoClips[0];
+                        videoPlayer.Prepare();
+                        videoPlayer.isLooping = false;
                         break;
 
                     default:
@@ -141,14 +149,15 @@ public class TokenMember : MonoBehaviour
         screen.GetComponent<FadeInOut>().FadeOut();
         voiceParticleSystem.enabled = true;
         //screen.active = false;
-        //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
     }
 
     //TODO: implement
     private void SpeechRequest()
     {
+        screen.GetComponent<FadeInOut>().FadeIn(0);
         Debug.Log("Redewunsch von Member " + Position + ".");
-        screen.GetComponent<FadeInOut>().FadeOut();
+        videoPlayer.Play();
+        screen.GetComponent<FadeInOut>().FadeOut(4);
 
         //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
     }
