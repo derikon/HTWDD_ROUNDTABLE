@@ -4,46 +4,39 @@ using UnityEngine;
 
 public class testRotate : MonoBehaviour
 {
-    public GameObject cube;
-    public float speed;
+    public GameObject rotationpoint;
+    public float speed = 0.5f;
+    public float zPosition;
+    private bool isRising;
+    private bool prevRising;
 
     // Use this for initialization
     void Start()
     {
-        //StartCoroutine(RotateMe());
+        StartCoroutine(RotateName());
+        zPosition = transform.rotation.z;
+        //Debug.Log("Start Z:" + zPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        while (transform.rotation.z >= -180)
-        {
-            transform.RotateAround(cube.transform.position, new Vector3(0.0f, 0.0f, -0.1f), 100 * Time.deltaTime * speed);
-        }
+        zPosition = transform.rotation.z;
+        //Debug.Log("Aktuelle Z:" + zPosition);
 
     }
 
-    IEnumerator RotateMe()
+    IEnumerator RotateName()
     {
-        float moveSpeed = 0.1f;
-        while (this.transform.rotation.z > 0)
+        yield return new WaitForSeconds(3);
+        while (zPosition <= 0.99999)
         {
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(0, 0, 0), moveSpeed * Time.time);
+
+            transform.RotateAround(rotationpoint.transform.position, new Vector3(0.0f, 0.0f, 0.1f), 100 * Time.deltaTime * speed);
+            //Debug.Log("Position Z: " + transform.rotation.z);
             yield return null;
         }
-        this.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-        //Wait for 4 seconds
-        //yield return new WaitForSeconds(3);
-
-        //while (this.transform.rotation.z > -180)
-        //{
-        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(0, 0, -180), moveSpeed * Time.time);
-        //    yield return null;
-        //}
-        //this.transform.rotation = Quaternion.Euler(0, 0, -180);
-
-
-        yield return null;
     }
+
+
 }

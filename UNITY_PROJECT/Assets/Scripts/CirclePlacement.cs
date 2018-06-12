@@ -63,7 +63,7 @@ public class CirclePlacement : MonoBehaviour
             {
                 foreach (var tm in textMesh)
                 {
-                    tm.text = "Player " + i;
+                    tm.text = "Teilnehmer " + i;
                 }
                 //textMesh.text = "Player " + i;
             }
