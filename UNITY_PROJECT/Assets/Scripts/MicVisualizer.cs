@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MicVisualizer : MonoBehaviour
 {
     private MicControlC micControl;
-    private VoiceParticleSystem voiceParticleSystem;
+    DateTime triggerTime;
+    TimeSpan timeSpan = new TimeSpan(0, 0, 0, 0, 200);
 
     public float loudnessThreshhold;
+    public float currentLoudness;
     public ParticleSystem particleSystemNoise;
 
     public float[] FreqBands = new float[8];
@@ -17,15 +20,19 @@ public class MicVisualizer : MonoBehaviour
     void Start()
     {
         micControl = GetComponentInChildren<MicControlC>();
-        //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
-        //particleSystemRing.Play();
+        triggerTime = DateTime.Now;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // TODO: delete MakeFreqBands
         MakeFreqBands();
-        MakeItRain();
+        if (DateTime.Now.Subtract(triggerTime) > timeSpan)
+        {
+            triggerTime = DateTime.Now;
+            TriggerParticleSystem();
+        }
     }
 
     private void MakeFreqBands()
@@ -39,8 +46,6 @@ public class MicVisualizer : MonoBehaviour
         {
             average = 0;
             int sampleCount = (int)Mathf.Pow(2, i) * 2;
-
-            //Debug.Log("SampleCount: " + sampleCount);
 
             for (int j = 0; j < sampleCount; j++)
             {
@@ -57,16 +62,28 @@ public class MicVisualizer : MonoBehaviour
         }
     }
 
-    private void MakeItRain()
+    private void TriggerParticleSystem()
     {
-        loudnessThreshhold = micControl.loudness;
+        currentLoudness = Mathf.Round((micControl.loudness < 0.001 ? 0f : micControl.loudness) * 100) / 100;
 
-        if (loudnessThreshhold > 0)
+        if (currentLoudness > loudnessThreshhold)
         {
             if (!particleSystemNoise.isPlaying)
             {
+                // Enable playing for at least 1 second
+                timeSpan = new TimeSpan(0, 0, 0, 1);
                 particleSystemNoise.Play();
                 Debug.Log("Noise is playing");
+            }
+        }
+        else
+        {
+            if (particleSystemNoise.isPlaying)
+            {
+                // new timespan, so that every 200ms the Method will be checked again
+                timeSpan = new TimeSpan(0, 0, 0, 0, 200);
+                particleSystemNoise.Stop();
+                Debug.Log("Noise stopped now");
             }
         }
     }

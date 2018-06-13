@@ -8,6 +8,7 @@ public class TokenMember : MonoBehaviour
 {
     public GameObject screen;
     public ParticleSystem particleSystemRing;
+    public MicVisualizer voiceVisualizer;
 
     [SerializeField]
     private bool tokenIsPlaced = false;
@@ -57,6 +58,7 @@ public class TokenMember : MonoBehaviour
         videoPlayer.isLooping = true;
         videoPlayer.clip = videoClips[0];
         videoPlayer.Play();
+        voiceVisualizer.enabled = false;
         //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
@@ -160,6 +162,7 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
         screen.GetComponent<FadeInOut>().FadeOut(5);
+        voiceVisualizer.enabled = true;
         particleSystemRing.Play();
     }
 

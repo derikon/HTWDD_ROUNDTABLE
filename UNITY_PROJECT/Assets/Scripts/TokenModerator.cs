@@ -56,7 +56,7 @@ public class TokenModerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        videoPlayer = GetComponentInParent<VideoPlayer>();
+        videoPlayer = screen.GetComponentInParent<VideoPlayer>();
         videoPlayer.isLooping = true;
         videoPlayer.clip = videoClips[0];
         videoPlayer.Play();
