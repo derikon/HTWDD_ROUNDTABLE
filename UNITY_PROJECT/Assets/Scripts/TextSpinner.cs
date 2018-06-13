@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class NameSpinner : MonoBehaviour {
+public class TextSpinner : MonoBehaviour {
     public bool Enabled = false;
     public GameObject ReferenceObject;
     public float RotationSpeed = 0.9f;
@@ -12,6 +12,7 @@ public class NameSpinner : MonoBehaviour {
     private float _angleCum;
     [SerializeField]
     private float _alphaCum;
+    
     private Vector3 _zAxis;
     private Vector3 _initialPosition;
     private Quaternion _initialRotation;
