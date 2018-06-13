@@ -245,7 +245,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.060434, y: -3.0654263, z: -4.1255507}
+  m_LocalPosition: {x: -0.17863412, y: 0.96628934, z: -6.9705124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -389,6 +389,6 @@ MonoBehaviour:
   ReferenceObject: {fileID: 1247411498}
   RotationSpeed: 0.9
   AngleMax: 180
-  FadeOutSpeed: 0.01
+  FadeOutSpeed: 1
   _angleCum: 0
   _alphaCum: 0
