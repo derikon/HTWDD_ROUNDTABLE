@@ -8,6 +8,8 @@ using System;
 public class TokenModerator : MonoBehaviour
 {
     public GameObject screen;
+    public VideoClip[] videoClips;
+    VoiceParticleSystem voiceParticleSystem;
 
     GameObject buzzer_bg;
     DateTime triggerTime;
@@ -54,23 +56,34 @@ public class TokenModerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        videoPlayer = GetComponent<VideoPlayer>();
+        videoPlayer = GetComponentInParent<VideoPlayer>();
+        videoPlayer.isLooping = true;
+        videoPlayer.clip = videoClips[0];
+        videoPlayer.Play();
 
         buzzer_bg = GameObject.FindGameObjectWithTag("Buzzer_BG");
 
         triggerTime = DateTime.Now;
+
+        voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //TODO: just for debugging reasons, delete afterwards
+        if (Input.GetKeyUp("down"))
+        {
+            InitialTokenAction();
+        }
+
         if (Input.GetKeyUp(KeyCode.F))
         {
             BuzzerAction();
         }
 
-        if (buzzer_bg == null) return;
+        if (buzzer_bg == null)
+            return;
 
         if ((DateTime.Now).Subtract(triggerTime) > timeSpan && buzzer_bg.GetComponent<FadeInOut>().isFadedOut == false)
         {
@@ -92,10 +105,8 @@ public class TokenModerator : MonoBehaviour
                 switch (output)
                 {
                     case "true":
+                        Debug.Log("Moderator Token is placed!");
                         tokenIsPlaced = true;
-                        //screen.SetActive(true);
-                        //Cube.SetActive(tokenIsPlaced);
-                        videoPlayer.Play();
                         if (initialPlacement)
                         {
                             initialPlacement = false;
@@ -109,9 +120,6 @@ public class TokenModerator : MonoBehaviour
 
                     case "false":
                         tokenIsPlaced = false;
-                        //screen.SetActive(false);
-                        //Cube.SetActive(tokenIsPlaced);
-                        videoPlayer.Stop();
                         break;
 
                     default:
@@ -156,14 +164,24 @@ public class TokenModerator : MonoBehaviour
     void BuzzerAction()
     {
         Debug.LogError("MODERATOR BUZZER!");
+        videoPlayer.clip = videoClips[2];
+        videoPlayer.Prepare();
+        videoPlayer.isLooping = false;
+
         triggerTime = DateTime.Now;
+        videoPlayer.Play();
+        screen.GetComponent<FadeInOut>().FadeIn(0);
+        screen.GetComponent<FadeInOut>().FadeOut(4);
+
+        // Fade in background
         buzzer_bg.GetComponent<FadeInOut>().FadeIn();
     }
 
     //TODO: implement
     private void InitialTokenAction()
     {
-        Debug.Log("Hallo du auf Position " + Position + "!");
-        //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
+        Debug.Log("Hallo Moderator!");
+        screen.GetComponent<FadeInOut>().FadeOut(5);
+        voiceParticleSystem.enabled = true;
     }
 }
