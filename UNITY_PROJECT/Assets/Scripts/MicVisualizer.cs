@@ -36,7 +36,7 @@ public class MicVisualizer : MonoBehaviour
             average = 0;
             int sampleCount = (int)Mathf.Pow(2, i) * 2;
 
-            Debug.Log("SampleCount: " + sampleCount);
+            //Debug.Log("SampleCount: " + sampleCount);
 
             for (int j = 0; j < sampleCount; j++)
             {

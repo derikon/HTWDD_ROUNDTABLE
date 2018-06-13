@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class TokenMember : MonoBehaviour
 {
     public GameObject screen;
+    public TextMesh textmesh;
 
 
     [SerializeField]
@@ -55,6 +56,9 @@ public class TokenMember : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (serialPort == null)
+            return;
+
         if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
 
         try
@@ -64,7 +68,7 @@ public class TokenMember : MonoBehaviour
             {
                 switch (output)
                 {
-                    case "1":
+                    case "true":
                         Debug.Log("Token on Position " + Position + " is placed!");
                         tokenIsPlaced = true;
                         //screen.SetActive(true);
@@ -81,7 +85,7 @@ public class TokenMember : MonoBehaviour
 
                         break;
 
-                    case "0":
+                    case "false":
                         Debug.Log("Token on Position " + Position + " is removed!");
                         tokenIsPlaced = false;
                         //screen.SetActive(false);
@@ -112,14 +116,14 @@ public class TokenMember : MonoBehaviour
         try
         {
             serialPort.Open();
+            serialPort.ReadTimeout = 10;
+            return true;
         }
         catch (System.Exception)
         {
             Debug.LogError("Cannot open Port " + COMPort + "! It might be eventually used.");
-            throw;
+            return false;
         }
-        serialPort.ReadTimeout = 10;
-        return true;
     }
 
     public bool TokenIsPlaced()
@@ -132,6 +136,7 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
+        StartCoroutine(RotateMe());
     }
 
     //TODO: implement
@@ -139,5 +144,19 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Redewunsch von Member " + Position + ".");
         //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
+    }
+
+    IEnumerator RotateMe()
+    {
+
+        float moveSpeed = 0.1f;
+        while (this.transform.rotation.z > 0)
+        {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(0, 0, 0), moveSpeed * Time.time);
+            yield return null;
+        }
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        yield return null;
     }
 }

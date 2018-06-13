@@ -55,7 +55,12 @@ public class TokenModerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (string.IsNullOrEmpty(COMPort) || serialPort.IsOpen) return;
+        if (serialPort == null)
+            return;
+
+
+        if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen)
+            return;
 
         try
         {
@@ -64,7 +69,7 @@ public class TokenModerator : MonoBehaviour
             {
                 switch (output)
                 {
-                    case "1":
+                    case "true":
                         tokenIsPlaced = true;
                         //screen.SetActive(true);
                         //Cube.SetActive(tokenIsPlaced);
@@ -72,7 +77,7 @@ public class TokenModerator : MonoBehaviour
                         videoPlayer.Play();
                         break;
 
-                    case "0":
+                    case "false":
                         tokenIsPlaced = false;
                         //screen.SetActive(false);
                         //Cube.SetActive(tokenIsPlaced);
@@ -89,6 +94,7 @@ public class TokenModerator : MonoBehaviour
         catch (System.Exception)
         {
             // Nothing to do here, because else the log would be flooded
+            throw;
         }
     }
 
@@ -97,7 +103,7 @@ public class TokenModerator : MonoBehaviour
         if (string.IsNullOrEmpty(comPort)) return false;
 
         COMPort = comPort;
-        serialPort = new SerialPort("\\\\.\\COM" + 11, 9600);
+        serialPort = new SerialPort("\\\\.\\COM" + COMPort, 9600);
         try
         {
             serialPort.Open();

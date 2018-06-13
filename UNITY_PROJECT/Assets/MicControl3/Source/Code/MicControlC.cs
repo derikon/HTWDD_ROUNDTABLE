@@ -289,7 +289,15 @@ public class MicControlC : MonoBehaviour
             //set selected device from isnpector as device number. (to find the device).
             if (i >= 1 && !useDefaultMic)
             {
-                selectedDevice = Microphone.devices[InputDevice];
+                try
+                {
+                    selectedDevice = Microphone.devices[InputDevice];
+                }
+                catch (System.Exception)
+                {
+
+                    //throw;
+                }
             }
 
             //set the default device if enabled

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - TabletText
   - DiscussionManager
+  - Discussion
+  - DiscussionTopic
+  - PlayerName
   layers:
   - Default
   - TransparentFX
@@ -42,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlayerText Layer
+    uniqueID: 1408938085
+    locked: 0
+  - name: Topic Layer
+    uniqueID: 4006667311
     locked: 0
