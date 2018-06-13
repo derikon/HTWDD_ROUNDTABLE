@@ -3,10 +3,11 @@
 
 public class TextSpinner : MonoBehaviour {
     public bool Enabled = false;
+    public bool EnableFading = true;
     public GameObject ReferenceObject;
     public float RotationSpeed = 0.9f;
     public float AngleMax = 180f;
-    public float FadeOutSpeed = .01f;
+    public float FadeOutSpeed = 1f;
 
     [SerializeField]
     private float _angleCum;
@@ -22,7 +23,7 @@ public class TextSpinner : MonoBehaviour {
     private Color _textColor;
 
 
-    void Start() {
+    private void Start() {
         _alphaCum = 1f;
         _angleCum = 0f;
         _zAxis = Vector3.forward;
@@ -34,7 +35,7 @@ public class TextSpinner : MonoBehaviour {
     }
 
     
-    void Update() {
+    private void Update() {
         if (!Enabled) {
             return;
         }
@@ -42,12 +43,9 @@ public class TextSpinner : MonoBehaviour {
         if (!_rotationFinished) {
             Rotate();
         }
-        else {
+        else if (EnableFading) {
             FadeOut();
-        }
-        
-        if (_fadeOutFinished) {
-            Restore();
+            Enabled = !_fadeOutFinished;
         }
     }
 
@@ -62,19 +60,6 @@ public class TextSpinner : MonoBehaviour {
         }
     }
 
-    
-    private void Restore() {
-        transform.position = _initialPosition;
-        transform.rotation = _initialRotation;
-        _angleCum = 0f;
-        _alphaCum = 1f;
-        _textColor.a = 1f;
-        _textMesh.color = _textColor;
-        Enabled = false;
-        _rotationFinished = false;
-        _fadeOutFinished = false;
-    }
-
 
     private void FadeOut() {
         var alpha = Time.deltaTime * FadeOutSpeed;
@@ -85,5 +70,17 @@ public class TextSpinner : MonoBehaviour {
         else {
             _fadeOutFinished = true;
         }
+    }
+    
+
+    public void Restore() {
+        transform.position = _initialPosition;
+        transform.rotation = _initialRotation;
+        _angleCum = 0f;
+        _alphaCum = 1f;
+        _textColor.a = 1f;
+        _textMesh.color = _textColor;
+        _rotationFinished = false;
+        _fadeOutFinished = false;
     }
 }

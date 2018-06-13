@@ -561,6 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enabled: 0
+  EnableFading: 1
   ReferenceObject: {fileID: 783905363}
   RotationSpeed: 0.9
   AngleMax: 720
