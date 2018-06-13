@@ -17,6 +17,7 @@ public class DiscussionManager : MonoBehaviour
         if (TabletText == null)
         {
             TabletText = GameObject.FindGameObjectWithTag("TabletText").GetComponent<Text>();
+
         }
     }
 
@@ -31,7 +32,6 @@ public class DiscussionManager : MonoBehaviour
     {
         for (int i = 0; i <= discussion.memberList.Count; i++)
         {
-            //discussionMembers[i].GetComponent<TextMesh>().text = discussion.memberList[i].name;
             if (i == 0)
             {
                 discussionMembers[i].GetComponentInChildren<TextMesh>().text = "Moderator";
