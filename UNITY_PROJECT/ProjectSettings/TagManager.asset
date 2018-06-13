@@ -9,6 +9,7 @@ TagManager:
   - Discussion
   - DiscussionTopic
   - PlayerName
+  - RemainigTime
   layers:
   - Default
   - TransparentFX

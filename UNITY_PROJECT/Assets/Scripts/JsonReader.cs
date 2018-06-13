@@ -20,8 +20,11 @@ public class Discussion
 }
 
 
+
+
 public class JsonReader : MonoBehaviour
 {
+
     public Discussion onJSONDiscussionReceived(JSONObject jsonDiscussion)
     {
         //var keyArray = jsonDiscussion.keys.ToArray();
@@ -153,4 +156,54 @@ public class JsonReader : MonoBehaviour
         }
         return newMember;
     }
+
+    public string getTopic(JSONObject jsonTopic)
+    {
+        string topic = "";
+        var keyArray = jsonTopic.keys.ToArray();
+        Dictionary<string, JSONObject> localMap = new Dictionary<string, JSONObject>();
+
+        foreach (var key in keyArray)
+        {
+            if (!localMap.ContainsKey(key))
+            {
+                localMap.Add(key, jsonTopic[key]);
+            }
+            if (key == "topic")
+            {
+                if (localMap[key].type == JSONObject.Type.STRING)
+                {
+                    Debug.Log("Got Topic: " + localMap[key]);
+                    topic = localMap[key].ToString();
+                }
+
+            }
+        }
+        return topic;
+    }
+    public string getRemainingTime(JSONObject jsonRemainingTime)
+    {
+        string remainingTime = "";
+        var keyArray = jsonRemainingTime.keys.ToArray();
+        Dictionary<string, JSONObject> localMap = new Dictionary<string, JSONObject>();
+
+        foreach (var key in keyArray)
+        {
+            if (!localMap.ContainsKey(key))
+            {
+                localMap.Add(key, jsonRemainingTime[key]);
+            }
+            if (key == "remaining_time")
+            {
+                if (localMap[key].type == JSONObject.Type.STRING)
+                {
+                    Debug.Log("Got RemainingTime: " + localMap[key]);
+                    remainingTime = localMap[key].ToString();
+                }
+
+            }
+        }
+        return remainingTime;
+    }
 }
+

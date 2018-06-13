@@ -5,20 +5,15 @@ using UnityEngine.UI;
 public class DiscussionManager : MonoBehaviour
 {
 
-    public Text TabletText;
-
     private List<GameObject> discussionMembers = new List<GameObject>();
     public GameObject pauseObject;
     public GameObject discussionObject;
+    public GameObject DiscussionTopic;
+    public GameObject RemainingTime;
 
     // Use this for initialization
     void Start()
     {
-        if (TabletText == null)
-        {
-            TabletText = GameObject.FindGameObjectWithTag("TabletText").GetComponent<Text>();
-
-        }
     }
 
     public void FindAllPlayers()
@@ -41,6 +36,7 @@ public class DiscussionManager : MonoBehaviour
                 discussionMembers[i].GetComponentInChildren<TextMesh>().text = discussion.memberList[i - 1].name;
             }
         }
+
     }
 
     public void OnStartPause()
@@ -54,4 +50,17 @@ public class DiscussionManager : MonoBehaviour
         pauseObject.SetActive(false);
         discussionObject.SetActive(true);
     }
+
+    public void OnRecievedTopic(string topic)
+    {
+        //GameObject.FindGameObjectWithTag("DiscussionTopic").GetComponent<TextMesh>().text = topic;
+        DiscussionTopic.GetComponent<TextMesh>().text = topic;
+    }
+
+    public void OnRecievedRemainingTime(string remainingTime)
+    {
+        //GameObject.FindGameObjectWithTag("RemainingTime").GetComponent<TextMesh>().text = remainingTime;
+        RemainingTime.GetComponent<TextMesh>().text = remainingTime;
+    }
+
 }

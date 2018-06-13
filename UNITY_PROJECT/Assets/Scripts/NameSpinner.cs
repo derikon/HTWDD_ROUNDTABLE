@@ -3,7 +3,7 @@
 
 public class NameSpinner : MonoBehaviour
 {
-    public bool Enabled = false;
+    public bool Enabled = true;
     public GameObject ReferenceObject;
     public float RotationSpeed = 0.9f;
     public float AngleMax = 180f;

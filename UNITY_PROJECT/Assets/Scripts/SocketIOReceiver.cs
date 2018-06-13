@@ -31,16 +31,58 @@ public class SocketIOReceiver : MonoBehaviour
         socket.On("new_discussion", OnNewDiscussion);
         socket.On("start_discussion", OnStartDiscussion);
         socket.On("end_discussion", OnEndDiscussion);
-        //socket.On("remaining_time", OnRemainingTime);
+        socket.On("remaining_time", OnRemainingTime);
         socket.On("start_pause", OnStartPause);
         socket.On("end_pause", OnEndPause);
-        //socket.On("topic", OnTopic);
+        socket.On("topic", OnTopic);
         //socket.On("silence", OnSilence);
     }
 
 
     void OnOpen(SocketIOEvent e)
     {
+        Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
+    }
+
+    void OnRemainingTime(SocketIOEvent e)
+    {
+        string remainingTime = "";
+        JSONObject payload = getPayload(e);
+
+        if (payload != null)
+        {
+            remainingTime = JsonReader.getRemainingTime(payload);
+        }
+
+        if (remainingTime != null)
+        {
+            DiscussionManager.OnRecievedRemainingTime(remainingTime);
+        }
+        else
+        {
+            Debug.LogError("remainingTime is null");
+        }
+        Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
+    }
+
+    void OnTopic(SocketIOEvent e)
+    {
+        string topic = "";
+        JSONObject payload = getPayload(e);
+
+        if (payload != null)
+        {
+            topic = JsonReader.getTopic(payload);
+        }
+
+        if (topic != null)
+        {
+            DiscussionManager.OnRecievedTopic(topic);
+        }
+        else
+        {
+            Debug.LogError("topic is null");
+        }
         Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
     }
 
@@ -66,17 +108,9 @@ public class SocketIOReceiver : MonoBehaviour
     void OnNewDiscussion(SocketIOEvent e)
     {
         Discussion discussion = null;
-        JSONObject jsonMessage = (JSONObject)e.data;
-        var keyArray = jsonMessage.keys.ToArray();
-        JSONObject payload = null;
-        foreach (var key in keyArray)
-        {
-            if (key.Equals("payload"))
-            {
-                Debug.Log("Got Payload: " + jsonMessage[key]);
-                payload = jsonMessage[key];
-            }
-        }
+
+        JSONObject payload = getPayload(e);
+
         if (payload != null)
         {
             discussion = JsonReader.onJSONDiscussionReceived(payload);
@@ -118,5 +152,21 @@ public class SocketIOReceiver : MonoBehaviour
     public void AckToServer()
     {
         socket.Emit("ack");
+    }
+
+    private JSONObject getPayload(SocketIOEvent e)
+    {
+        JSONObject jsonMessage = (JSONObject)e.data;
+        var keyArray = jsonMessage.keys.ToArray();
+        JSONObject payload = null;
+        foreach (var key in keyArray)
+        {
+            if (key.Equals("payload"))
+            {
+                Debug.Log("Got Payload: " + jsonMessage[key]);
+                payload = jsonMessage[key];
+            }
+        }
+        return payload;
     }
 }
