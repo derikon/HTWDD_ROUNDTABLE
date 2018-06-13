@@ -7,6 +7,9 @@ public class MicVisualizer : MonoBehaviour
     private MicControlC micControl;
     private VoiceParticleSystem voiceParticleSystem;
 
+    public float loudnessThreshhold;
+    public ParticleSystem particleSystemNoise;
+
     public float[] FreqBands = new float[8];
     float average = 0;
 
@@ -14,7 +17,8 @@ public class MicVisualizer : MonoBehaviour
     void Start()
     {
         micControl = GetComponentInChildren<MicControlC>();
-        voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
+        //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
+        //particleSystemRing.Play();
     }
 
     // Update is called once per frame
@@ -55,43 +59,15 @@ public class MicVisualizer : MonoBehaviour
 
     private void MakeItRain()
     {
-        int count = 0;
+        loudnessThreshhold = micControl.loudness;
 
-        var spectrum = micControl.spectrumData;
-        int spectrumLength = micControl.spectrumData.Length;
-
-        for (int i = 0; i < 8; i++)
+        if (loudnessThreshhold > 0)
         {
-            average = 0;
-            int sampleCount = (int)Mathf.Pow(2, i) * 2;
-
-            //Debug.Log("SampleCount: " + sampleCount);
-
-            for (int j = 0; j < sampleCount; j++)
+            if (!particleSystemNoise.isPlaying)
             {
-                if (count < spectrumLength)
-                {
-                    average += micControl.spectrumData[count] * (count + 1);
-                }
-                count++;
+                particleSystemNoise.Play();
+                Debug.Log("Noise is playing");
             }
-
-            average /= count;
         }
-
-        //if (average > average - 1)
-        //{
-        //    Debug.Log("MAKE IT RAIN BABY!");
-        //    if (voiceParticleSystem != null)
-        //    {
-        //        if (!voiceParticleSystem.NoiseSystem.isPlaying)
-        //            voiceParticleSystem.NoiseSystem.Play();
-        //    }
-        //    else
-        //    {
-        //        if (voiceParticleSystem.NoiseSystem.isPlaying)
-        //            voiceParticleSystem.NoiseSystem.Stop();
-        //    }
-        //}
     }
 }

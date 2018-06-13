@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class TokenMember : MonoBehaviour
 {
     public GameObject screen;
+    public ParticleSystem particleSystemRing;
 
     [SerializeField]
     private bool tokenIsPlaced = false;
@@ -41,7 +42,7 @@ public class TokenMember : MonoBehaviour
     private VideoPlayer videoPlayer;
     public VideoClip[] videoClips;
 
-    VoiceParticleSystem voiceParticleSystem;
+    //VoiceParticleSystem voiceParticleSystem;
 
     [SerializeField]
     private bool initialPlacement = true;
@@ -56,69 +57,78 @@ public class TokenMember : MonoBehaviour
         videoPlayer.isLooping = true;
         videoPlayer.clip = videoClips[0];
         videoPlayer.Play();
-        voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
+        //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void useKeyboard()
     {
-
-        if (Input.GetKeyUp("down"))
-        {
-            InitialTokenAction();
-        }
+        //if (Input.GetKeyUp("down"))
+        //{
+        //    InitialTokenAction();
+        //}
 
         if (Input.GetKeyUp("up"))
         {
-            SpeechRequest();
+            if (initialPlacement)
+            {
+                Debug.Log("INITIAL PLACEMENT ON POS " + Position);
+                initialPlacement = false;
+                InitialTokenAction();
+            }
+            else
+            {
+                SpeechRequest();
+            }
         }
+    }
 
+    void useSerial()
+    {
         if (serialPort == null)
             return;
 
         if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
 
-        try
+        string output = "";
+        try { output = serialPort.ReadLine(); }
+        catch (System.Exception) { }
+
+        if (output == "")
         {
-            string output = serialPort.ReadLine();
-            if (output != tokenIsPlaced.ToString())
-            {
-                switch (output)
+            return;
+        }
+
+        Debug.LogWarning("read serial port: " + output);
+        switch (output)
+        {
+            case "true":
+                Debug.LogWarning("Token on Position " + Position + " is placed!");
+                tokenIsPlaced = true;
+                if (initialPlacement)
                 {
-                    case "true":
-                        Debug.Log("Token on Position " + Position + " is placed!");
-                        tokenIsPlaced = true;
-                        if (initialPlacement)
-                        {
-                            Debug.Log("INITIAL PLACEMENT ON POS " + Position);
-                            initialPlacement = false;
-                            InitialTokenAction();
-                        }
-                        else
-                        {
-                            SpeechRequest();
-                        }
-
-                        break;
-
-                    case "false":
-                        Debug.Log("Token on Position " + Position + " is removed!");
-                        tokenIsPlaced = false;
-                        break;
-
-                    default:
-                        Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
-                        break;
+                    Debug.LogWarning("INITIAL PLACEMENT ON POS " + Position);
+                    initialPlacement = false;
+                    InitialTokenAction();
+                }
+                else
+                {
+                    SpeechRequest();
                 }
 
-            }
-        }
-        catch (System.Exception)
-        {
-            // Nothing to do here, because else the log would be flooded
-        }
+                break;
 
+            case "false":
+                Debug.Log("Token on Position " + Position + " is removed!");
+                tokenIsPlaced = false;
+                break;
+        }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        useKeyboard();
+        useSerial();
     }
 
     public bool InitializeComPort(string comPort)
@@ -150,7 +160,7 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
         screen.GetComponent<FadeInOut>().FadeOut(5);
-        voiceParticleSystem.enabled = true;
+        particleSystemRing.Play();
     }
 
     //TODO: implement
@@ -158,10 +168,11 @@ public class TokenMember : MonoBehaviour
     {
         videoPlayer.clip = videoClips[2];
         videoPlayer.Prepare();
+        videoPlayer.waitForFirstFrame = true;
         videoPlayer.isLooping = false;
+        videoPlayer.Play();
 
         Debug.Log("Redewunsch von Member " + Position + ".");
-        videoPlayer.Play();
         screen.GetComponent<FadeInOut>().FadeIn(0);
         screen.GetComponent<FadeInOut>().FadeOut(4);
     }
