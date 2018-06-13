@@ -95,5 +95,10 @@ $RECYCLE.BIN/
 
 
 # NodeJS
-
 node_modules/
+
+
+
+# Rider (JetBrains)
+**/.idea/
+**/JetBrains
