@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using SocketIO;
+using UnityEngine.SceneManagement;
 
 public class SocketIOReceiver : MonoBehaviour
 {
@@ -134,6 +135,7 @@ public class SocketIOReceiver : MonoBehaviour
     void OnEndDiscussion(SocketIOEvent e)
     {
         Debug.Log("[SocketIO] End Discussion Triggered");
+        SceneManager.LoadScene("MainScene");
     }
 
     void OnStartPause(SocketIOEvent e)
