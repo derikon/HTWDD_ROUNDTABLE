@@ -105,7 +105,7 @@ public class TokenMember : MonoBehaviour
         Debug.LogWarning("read serial port: " + output);
         switch (output)
         {
-            case "true":
+            case "1":
                 Debug.LogWarning("Token on Position " + Position + " is placed!");
                 tokenIsPlaced = true;
                 if (initialPlacement)
@@ -121,7 +121,7 @@ public class TokenMember : MonoBehaviour
 
                 break;
 
-            case "false":
+            case "0":
                 Debug.Log("Token on Position " + Position + " is removed!");
                 tokenIsPlaced = false;
                 break;
