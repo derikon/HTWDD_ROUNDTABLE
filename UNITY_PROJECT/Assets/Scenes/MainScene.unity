@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 361061710}
   - component: {fileID: 361061709}
   - component: {fileID: 361061708}
+  - component: {fileID: 361061711}
   m_Layer: 0
   m_Name: RemainingTime
   m_TagString: RemainigTime
@@ -253,6 +254,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &361061711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 361061706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197f3c538093e4d4e8b851084cb1e83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDelay: 0
+  fadeTime: 0.5
+  fadeInOnStart: 0
+  fadeOutOnStart: 1
+  isFadedOut: 0
 --- !u!1 &494028224
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +481,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: a47c1e0d0dd192443a8f54c90cbe36d4, type: 2}
+  - {fileID: 2100000, guid: acf845171abd3d04e9a02b1a7cc91145, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
