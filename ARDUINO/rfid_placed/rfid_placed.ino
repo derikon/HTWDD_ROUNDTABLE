@@ -38,11 +38,13 @@ void loop() {
     if(mfrc522.uid.size < 1) {
       if(initialized == true){
         if(previousNotNull != notNull){
-          Serial.println(notNull);
+          if(notNull)
+            Serial.println(notNull);
           previousNotNull = notNull;
         }        
       } else {
-        Serial.println(notNull);
+        if(notNull)
+          Serial.println(notNull);
         initialized = true;     
         previousNotNull = notNull;
       }
@@ -65,7 +67,8 @@ void loop() {
     
     if(initialized == true){
       if(previousNotNull != notNull){
-        Serial.println(notNull);
+        if(notNull)
+          Serial.println(notNull);
         previousNotNull = notNull;
       }        
     } else {       
@@ -75,5 +78,5 @@ void loop() {
     
     // Versetzt die gelesene Karte in einen Ruhemodus, um nach anderen Karten suchen zu können.
     mfrc522.PICC_HaltA();
-    mfrc522.PCD_Init();
+    //mfrc522.PCD_Init();
 }
