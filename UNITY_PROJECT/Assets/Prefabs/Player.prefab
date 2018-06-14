@@ -173,7 +173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1601251306844028
 GameObject:
   m_ObjectHideFlags: 1
@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 1911050155994174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.018, y: 0.49, z: -0.7469759}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.25}
   m_Children: []
   m_Father: {fileID: 4549045969259264}
   m_RootOrder: 1
@@ -440,7 +440,7 @@ Transform:
   m_GameObject: {fileID: 1398946095790064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.018, y: 0.49, z: -0.7469759}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 4549045969259264}
   m_RootOrder: 2
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enabled: 0
-  EnableFading: 0
+  EnableFading: 1
   ReferenceObject: {fileID: 1579207600010454}
   RotationSpeed: 0.5
   AngleMax: 180
@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7bdcefd7eb14f348a6bbea4361bf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loudnessThreshhold: 0
+  loudnessThreshhold: 0.5
   currentLoudness: 0
   particleSystemNoise: {fileID: 198140662336497810}
   FreqBands:
@@ -10703,7 +10703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.541105, y: -2.1946735}
+  m_AnchoredPosition: {x: 13.004697, y: -4.995784}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &328167957863603692

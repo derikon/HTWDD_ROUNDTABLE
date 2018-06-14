@@ -27,7 +27,7 @@ public class MicVisualizer : MonoBehaviour
     void Update()
     {
         // TODO: delete MakeFreqBands
-        MakeFreqBands();
+        //MakeFreqBands();
         if (DateTime.Now.Subtract(triggerTime) > timeSpan)
         {
             triggerTime = DateTime.Now;

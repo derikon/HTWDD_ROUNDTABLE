@@ -114,8 +114,8 @@ public class CirclePlacement : MonoBehaviour
 public class COMPortConf
 {
     //TODO: COM Ports definieren
-    public String[] comPortArray = { "21", "", "", "", "" };
-    private string cOMPosMod = "22";
+    public String[] comPortArray = { "11", "", "", "", "" };
+    private string cOMPosMod = "15";
 
     public string COMPosMod
     {
