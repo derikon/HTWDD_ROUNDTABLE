@@ -166,9 +166,10 @@ public class TokenMember : MonoBehaviour
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
         //StartCoroutine(RotateMe());
 
-        screen.GetComponent<FadeInOut>().FadeOut(5);
+        screen.GetComponent<FadeInOut>().FadeOut(1);
         voiceVisualizer.enabled = true;
         particleSystemRing.Play();
+        GetComponentInChildren<TextSpinner>().Enabled = true;
     }
 
     //TODO: implement

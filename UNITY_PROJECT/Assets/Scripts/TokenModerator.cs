@@ -163,7 +163,7 @@ public class TokenModerator : MonoBehaviour
     // TODO: implement (animation)
     void BuzzerAction()
     {
-        Debug.LogError("MODERATOR BUZZER!");
+        //Debug.LogError("MODERATOR BUZZER!");
         videoPlayer.clip = videoClips[2];
         videoPlayer.Prepare();
         videoPlayer.isLooping = false;

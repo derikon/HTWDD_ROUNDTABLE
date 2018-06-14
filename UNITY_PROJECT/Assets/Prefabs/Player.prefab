@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enabled: 0
-  EnableFading: 1
+  EnableFading: 0
   ReferenceObject: {fileID: 1579207600010454}
   RotationSpeed: 0.5
   AngleMax: 180
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   videoClips:
   - {fileID: 32900000, guid: fd669f1ac1e215b4bb52befd78bed751, type: 3}
   - {fileID: 32900000, guid: 346bcd0c73020594b8b0c9939f1b07dd, type: 3}
-  - {fileID: 32900000, guid: 36cb295af7c96d7498a45232dcb78503, type: 3}
+  - {fileID: 32900000, guid: 4945425b16d197a4da5540a1d9f80ddd, type: 3}
   initialPlacement: 1
 --- !u!114 &114488508058078790
 MonoBehaviour:
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   videoClips:
   - {fileID: 32900000, guid: fd669f1ac1e215b4bb52befd78bed751, type: 3}
   - {fileID: 32900000, guid: 346bcd0c73020594b8b0c9939f1b07dd, type: 3}
-  - {fileID: 32900000, guid: 36cb295af7c96d7498a45232dcb78503, type: 3}
+  - {fileID: 32900000, guid: 4945425b16d197a4da5540a1d9f80ddd, type: 3}
   tokenIsPlaced: 0
   position: 0
   initialPlacement: 1

@@ -431,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 579611229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -559.229, y: -269.484, z: -5}
+  m_LocalPosition: {x: -559.23, y: -269.66, z: -5}
   m_LocalScale: {x: 19.28507, y: 10.076203, z: 1}
   m_Children: []
   m_Father: {fileID: 1400489090}
@@ -464,7 +464,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 8a6ba346e9b5885408c22d33c59cc982, type: 2}
+  - {fileID: 2100000, guid: a47c1e0d0dd192443a8f54c90cbe36d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -774,8 +774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f5ba48a0794b7887822423b38fa5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enabled: 1
-  EnableFading: 1
+  Enabled: 0
+  EnableFading: 0
   ReferenceObject: {fileID: 783905363}
   RotationSpeed: 0.5
   AngleMax: 720
