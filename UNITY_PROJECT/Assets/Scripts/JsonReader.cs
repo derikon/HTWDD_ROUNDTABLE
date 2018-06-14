@@ -46,7 +46,7 @@ public class JsonReader : MonoBehaviour
                     if (localMap[key].type == JSONObject.Type.STRING)
                     {
                         Debug.Log("Got Title: " + localMap[key]);
-                        discussion.title = localMap[key].ToString();
+                        discussion.title = ripQuotationMarks(localMap[key].ToString());
                     }
                     break;
                 case "duration":
@@ -94,7 +94,7 @@ public class JsonReader : MonoBehaviour
                     if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
                     {
                         Debug.Log("Got Title: " + currentMemberInfo.list[0]);
-                        newMember.name = currentMemberInfo.list[0].ToString();
+                        newMember.name = ripQuotationMarks(currentMemberInfo.list[0].ToString());
                     }
                     else
                     {
@@ -106,7 +106,7 @@ public class JsonReader : MonoBehaviour
                     if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
                     {
                         Debug.Log("Got Title: " + currentMemberInfo.list[0]);
-                        newMember.title = currentMemberInfo.list[0].ToString();
+                        newMember.title = ripQuotationMarks(currentMemberInfo.list[0].ToString());
                     }
                     else
                     {
@@ -118,7 +118,7 @@ public class JsonReader : MonoBehaviour
                     if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
                     {
                         Debug.Log("Got role: " + currentMemberInfo.list[0]);
-                        newMember.role = currentMemberInfo.list[0].ToString();
+                        newMember.role = ripQuotationMarks(currentMemberInfo.list[0].ToString());
                     }
                     else
                     {
@@ -141,7 +141,7 @@ public class JsonReader : MonoBehaviour
                     if (currentMemberInfo.list[0].type == JSONObject.Type.STRING)
                     {
                         Debug.Log("Got organisation: " + currentMemberInfo.list[0]);
-                        newMember.organisation = currentMemberInfo.list[0].ToString();
+                        newMember.organisation = ripQuotationMarks(currentMemberInfo.list[0].ToString());
                     }
                     else
                     {
@@ -174,7 +174,7 @@ public class JsonReader : MonoBehaviour
                 if (localMap[key].type == JSONObject.Type.STRING)
                 {
                     Debug.Log("Got Topic: " + localMap[key]);
-                    topic = localMap[key].ToString();
+                    topic = ripQuotationMarks(localMap[key].ToString());
                 }
 
             }
@@ -198,12 +198,25 @@ public class JsonReader : MonoBehaviour
                 if (localMap[key].type == JSONObject.Type.STRING)
                 {
                     Debug.Log("Got RemainingTime: " + localMap[key]);
-                    remainingTime = localMap[key].ToString();
+                    remainingTime = ripQuotationMarks(localMap[key].ToString());
                 }
 
             }
         }
         return remainingTime;
+    }
+
+    private string ripQuotationMarks(string quotetString)
+    {
+        string ripQuotetString = "";
+        if (quotetString != null)
+        {
+            ripQuotetString = quotetString.Replace("\"", "");
+        }
+
+
+        return ripQuotetString;
+        ;
     }
 }
 
