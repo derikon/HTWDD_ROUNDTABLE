@@ -58,14 +58,12 @@ public class CirclePlacement : MonoBehaviour
             players[i].transform.parent = transform;
             // TODO: will be different if we use TextMeshPro
             var textMesh = players[i].GetComponentsInChildren<TextMesh>();
-            //tokenMember.textmesh = textMesh;
             if (textMesh != null)
             {
                 foreach (var tm in textMesh)
                 {
                     tm.text = "Teilnehmer " + i;
                 }
-                //textMesh.text = "Player " + i;
             }
         }
 
