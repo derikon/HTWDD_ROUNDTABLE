@@ -61,7 +61,9 @@ public class DiscussionManager : MonoBehaviour
 
     public void OnRecievedRemainingTime(string remainingTime)
     {
+        RemainingTime.GetComponent<FadeInOut>().FadeIn(0);
         RemainingTime.GetComponent<TextMesh>().text = remainingTime;
+        RemainingTime.GetComponent<FadeInOut>().FadeOut(4);
     }
 
 }
