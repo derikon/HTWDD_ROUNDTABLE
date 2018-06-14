@@ -1426,7 +1426,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1911050155994174}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 0.48
+  simulationSpeed: 0.6
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -1497,7 +1497,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 1.92
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1982,7 +1982,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 50
+    maxNumParticles: 400
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -10716,7 +10716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.0024757, y: -6.9109917}
+  m_AnchoredPosition: {x: -15.474776, y: -3.8404493}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &328167957863603692
