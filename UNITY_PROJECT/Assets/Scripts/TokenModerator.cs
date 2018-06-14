@@ -13,7 +13,7 @@ public class TokenModerator : MonoBehaviour
 
     GameObject buzzer_bg;
     DateTime triggerTime;
-    TimeSpan timeSpan = new TimeSpan(0, 0, 5);
+    TimeSpan timeSpan = new TimeSpan(0, 0, 1);
 
     [SerializeField]
     private bool tokenIsPlaced = false;
