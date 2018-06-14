@@ -53,6 +53,7 @@ public class DiscussionManager : MonoBehaviour
 
     public void OnRecievedTopic(string topic)
     {
+        DiscussionTopic.GetComponent<FadeInOut>().FadeIn(1);
         DiscussionTopic.GetComponent<TextMesh>().text = topic;
         DiscussionTopic.GetComponent<TextSpinner>().Enabled = DiscussionTopic.GetComponent<TextSpinner>().EnableFading = true;
 
