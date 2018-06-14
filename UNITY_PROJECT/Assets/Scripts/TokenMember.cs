@@ -43,7 +43,6 @@ public class TokenMember : MonoBehaviour
     private int position;
     [SerializeField]
     private VideoPlayer[] videoPlayers;
-    public VideoClip[] videoClips;
 
     //VoiceParticleSystem voiceParticleSystem;
 
@@ -163,8 +162,6 @@ public class TokenMember : MonoBehaviour
     private void InitialTokenAction()
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
-        //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
-        //StartCoroutine(RotateMe());
 
         screens[0].GetComponent<FadeInOut>().FadeOut(1);
         voiceVisualizer.enabled = true;
@@ -175,7 +172,6 @@ public class TokenMember : MonoBehaviour
     //TODO: implement
     private void SpeechRequest()
     {
-        //videoPlayer.clip = videoClips[2];
         videoPlayers[0].Stop();
         videoPlayers[1].Stop();
         videoPlayers[1].Prepare();

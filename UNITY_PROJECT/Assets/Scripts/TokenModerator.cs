@@ -9,7 +9,7 @@ public class TokenModerator : MonoBehaviour
 {
     public GameObject screen;
     public VideoClip[] videoClips;
-    VoiceParticleSystem voiceParticleSystem;
+    public ParticleSystem particleSystemRing;
 
     GameObject buzzer_bg;
     DateTime triggerTime;
@@ -64,8 +64,6 @@ public class TokenModerator : MonoBehaviour
         buzzer_bg = GameObject.FindGameObjectWithTag("Buzzer_BG");
 
         triggerTime = DateTime.Now;
-
-        voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
     // Update is called once per frame
@@ -163,15 +161,7 @@ public class TokenModerator : MonoBehaviour
     // TODO: implement (animation)
     void BuzzerAction()
     {
-        //Debug.LogError("MODERATOR BUZZER!");
-        videoPlayer.clip = videoClips[2];
-        videoPlayer.Prepare();
-        videoPlayer.isLooping = false;
-
         triggerTime = DateTime.Now;
-        videoPlayer.Play();
-        screen.GetComponent<FadeInOut>().FadeIn(0);
-        screen.GetComponent<FadeInOut>().FadeOut(4);
 
         // Fade in background
         buzzer_bg.GetComponent<FadeInOut>().FadeIn();
@@ -180,8 +170,8 @@ public class TokenModerator : MonoBehaviour
     //TODO: implement
     private void InitialTokenAction()
     {
-        Debug.Log("Hallo Moderator!");
         screen.GetComponent<FadeInOut>().FadeOut(5);
-        //voiceParticleSystem.enabled = true;
+        particleSystemRing.Play();
+        GetComponentInChildren<TextSpinner>().Enabled = true;
     }
 }
