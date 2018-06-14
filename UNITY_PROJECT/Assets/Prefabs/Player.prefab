@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 4704822598395560}
   - component: {fileID: 198296680034258836}
   - component: {fileID: 199693497692281422}
+  - component: {fileID: 114325777367173794}
   m_Layer: 0
   m_Name: ring
   m_TagString: Untagged
@@ -1273,8 +1274,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1f5ba48a0794b7887822423b38fa5eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Enabled: 0
   EnableFading: 0
   ReferenceObject: {fileID: 1787557731979868}
@@ -1292,8 +1293,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 2
   StartScale: 0.1
   ScaleMultiplier: 1
@@ -1306,8 +1307,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 5
   StartScale: 0.1
   ScaleMultiplier: 1
@@ -1320,11 +1321,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 4
   StartScale: 0.1
   ScaleMultiplier: 1
+--- !u!114 &114325777367173794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398946095790064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d471416701fdc44b3b97afa1ec0b8cb9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  RadiusDelta: 0.1
 --- !u!114 &114360313171354448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1334,8 +1347,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 1
   StartScale: 0.1
   ScaleMultiplier: 1
@@ -1348,8 +1361,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 197f3c538093e4d4e8b851084cb1e83b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   fadeDelay: 0
   fadeTime: 0.5
   fadeInOnStart: 0
@@ -1364,8 +1377,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 0
   StartScale: 0.1
   ScaleMultiplier: 1
@@ -1378,8 +1391,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa18f3e6a59955244bf1e93f9a27145b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   enableSpectrumData: 0
   useDefaultMic: 0
   ShowDeviceName: 1
@@ -1411,8 +1424,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c406818322844924ebbeb4be7a82e73d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   screens:
   - {fileID: 1787557731979868}
   - {fileID: 1579207600010454}
@@ -1425,7 +1438,7 @@ MonoBehaviour:
   videoClips:
   - {fileID: 32900000, guid: fd669f1ac1e215b4bb52befd78bed751, type: 3}
   - {fileID: 32900000, guid: 346bcd0c73020594b8b0c9939f1b07dd, type: 3}
-  - {fileID: 32900000, guid: 4945425b16d197a4da5540a1d9f80ddd, type: 3}
+  - {fileID: 0}
   initialPlacement: 1
 --- !u!114 &114488508058078790
 MonoBehaviour:
@@ -1436,8 +1449,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 3
   StartScale: 0.1
   ScaleMultiplier: 1
@@ -1450,8 +1463,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b7bdcefd7eb14f348a6bbea4361bf11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   loudnessThreshhold: 0.5
   currentLoudness: 0
   particleSystemNoise: {fileID: 198140662336497810}
@@ -1473,8 +1486,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d789226b71264ab59f857d0fbe929b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Band: 6
   StartScale: 0.1
   ScaleMultiplier: 1
@@ -1487,13 +1500,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71d1f656a71ab9c4c9864a66a4229237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   screen: {fileID: 1787557731979868}
   videoClips:
   - {fileID: 32900000, guid: fd669f1ac1e215b4bb52befd78bed751, type: 3}
   - {fileID: 32900000, guid: 346bcd0c73020594b8b0c9939f1b07dd, type: 3}
-  - {fileID: 32900000, guid: 4945425b16d197a4da5540a1d9f80ddd, type: 3}
+  - {fileID: 0}
   tokenIsPlaced: 0
   position: 0
   initialPlacement: 1
@@ -1506,8 +1519,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 197f3c538093e4d4e8b851084cb1e83b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   fadeDelay: 0
   fadeTime: 0.5
   fadeInOnStart: 0
@@ -1521,7 +1534,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1911050155994174}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 0.48
+  simulationSpeed: 0.6
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -1592,7 +1605,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 1.92
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2077,7 +2090,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 50
+    maxNumParticles: 400
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -6150,7 +6163,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.94
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6782,7 +6795,7 @@ ParticleSystem:
     arc:
       value: 360
       mode: 0
-      spread: 0.0000001
+      spread: 0
       speed:
         serializedVersion: 2
         minMaxState: 0
@@ -6842,7 +6855,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 2000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7280,9 +7293,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.7490196, b: 1, a: 1}
+        key0: {r: 0, g: 0.85490197, b: 1, a: 1}
         key1: {r: 0.14901961, g: 0.3137255, b: 0.4509804, a: 1}
-        key2: {r: 0, g: 0.7490196, b: 1, a: 0}
+        key2: {r: 0, g: 0.85490197, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -8564,7 +8577,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 1
+    enabled: 0
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -10811,7 +10824,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30.923447, y: -4.436253}
+  m_AnchoredPosition: {x: -15.474776, y: -3.8404493}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &328017926323538214
@@ -10836,9 +10849,9 @@ VideoPlayer:
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
+  m_Url:
+  m_EnabledAudioTracks:
+  m_DirectAudioMutes:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
@@ -10867,9 +10880,9 @@ VideoPlayer:
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
+  m_Url:
+  m_EnabledAudioTracks:
+  m_DirectAudioMutes:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
