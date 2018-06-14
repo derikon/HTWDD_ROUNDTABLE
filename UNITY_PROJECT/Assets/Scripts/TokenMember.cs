@@ -47,7 +47,7 @@ public class TokenMember : MonoBehaviour
     //VoiceParticleSystem voiceParticleSystem;
 
     [SerializeField]
-    private bool initialPlacement = true;
+    public bool initialPlacement = true;
 
     // supported baudrate is 9600
     private SerialPort serialPort;

@@ -41,14 +41,31 @@ public class DiscussionManager : MonoBehaviour
 
     public void OnStartPause()
     {
-        discussionObject.SetActive(false);
         pauseObject.SetActive(true);
+        discussionObject.SetActive(false);
     }
 
     public void OnEndPause()
     {
-        pauseObject.SetActive(false);
         discussionObject.SetActive(true);
+        pauseObject.SetActive(false);
+
+        // Enable Ring System for every Player
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            var tokenMember = player.GetComponent<TokenMember>();
+            var tokenModerator = player.GetComponent<TokenModerator>();
+
+            if (tokenMember.enabled && !tokenMember.initialPlacement)
+            {
+                tokenMember.particleSystemRing.Play();
+            }
+
+            if (tokenModerator.enabled && !tokenModerator.initialPlacement)
+            {
+                tokenModerator.particleSystemRing.Play();
+            }
+        }
     }
 
     public void OnRecievedTopic(string topic)
@@ -63,15 +80,12 @@ public class DiscussionManager : MonoBehaviour
     {
         RemainingTime.GetComponent<FadeInOut>().FadeIn(0);
         RemainingTime.GetComponent<TextMesh>().text = remainingTime;
-        RemainingTime.GetComponent<FadeInOut>().FadeOut(4);
+        RemainingTime.GetComponent<FadeInOut>().FadeOut(6);
     }
 
     public void OnRecievedSilence()
     {
         discussionObject.GetComponentInChildren<TokenModerator>().BuzzerAction();
-        //screen.GetComponent<FadeInOut>().FadeOut(5);
-        //particleSystemRing.Play();
-        //GetComponentInChildren<TextSpinner>().Enabled = true;
     }
 
 

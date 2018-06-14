@@ -73,7 +73,7 @@ public class MicVisualizer : MonoBehaviour
                 // Enable playing for at least 1 second
                 timeSpan = new TimeSpan(0, 0, 0, 1);
                 particleSystemNoise.Play();
-                Debug.Log("Noise is playing");
+                //Debug.Log("Noise is playing");
             }
         }
         else
@@ -83,7 +83,7 @@ public class MicVisualizer : MonoBehaviour
                 // new timespan, so that every 200ms the Method will be checked again
                 timeSpan = new TimeSpan(0, 0, 0, 0, 50);
                 particleSystemNoise.Stop();
-                Debug.Log("Noise stopped now");
+                //Debug.Log("Noise stopped now");
             }
         }
     }

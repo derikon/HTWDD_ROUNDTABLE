@@ -47,7 +47,7 @@ public class TokenModerator : MonoBehaviour
     private VideoPlayer videoPlayer;
 
     [SerializeField]
-    private bool initialPlacement = true;
+    public bool initialPlacement = true;
 
     // supported baudrate is 9600
     private SerialPort serialPort;
@@ -72,12 +72,16 @@ public class TokenModerator : MonoBehaviour
         //TODO: just for debugging reasons, delete afterwards
         if (Input.GetKeyUp("down"))
         {
-            InitialTokenAction();
-        }
-
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            BuzzerAction();
+            if (initialPlacement)
+            {
+                Debug.Log("INITIAL PLACEMENT ON MODERATOR");
+                initialPlacement = false;
+                InitialTokenAction();
+            }
+            else
+            {
+                BuzzerAction();
+            }
         }
 
         if (buzzer_bg == null)
@@ -170,7 +174,7 @@ public class TokenModerator : MonoBehaviour
     //TODO: implement
     private void InitialTokenAction()
     {
-        screen.GetComponent<FadeInOut>().FadeOut(5);
+        screen.GetComponent<FadeInOut>().FadeOut(1);
         particleSystemRing.Play();
         GetComponentInChildren<TextSpinner>().Enabled = true;
     }
