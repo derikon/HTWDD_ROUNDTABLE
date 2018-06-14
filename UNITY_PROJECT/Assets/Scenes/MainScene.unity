@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 921269098}
   - component: {fileID: 921269101}
   - component: {fileID: 921269096}
+  - component: {fileID: 921269097}
   m_Layer: 0
   m_Name: Rotation Text
   m_TagString: DiscussionTopic
@@ -575,6 +576,24 @@ SortingGroup:
   m_SortingLayerID: 1408938085
   m_SortingLayer: 1
   m_SortingOrder: 1
+--- !u!114 &921269097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 921269095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07803225087ba1a4ca12556cdfbfbdce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDelay: 0
+  fadeTime: 0.5
+  fadeInOnStart: 1
+  fadeOutOnStart: 1
+  isFadedOut: 0
+  logInitialFadeSequence: 0
+  colors: []
 --- !u!102 &921269098
 TextMesh:
   serializedVersion: 3
@@ -656,6 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enabled: 1
+  EnableFading: 1
   ReferenceObject: {fileID: 783905363}
   RotationSpeed: 0.5
   AngleMax: 720
