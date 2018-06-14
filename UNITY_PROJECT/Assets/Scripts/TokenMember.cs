@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 public class TokenMember : MonoBehaviour
 {
-    public GameObject screen;
+    public GameObject[] screens;
     public TextMesh textmesh;
 
     public ParticleSystem particleSystemRing;
@@ -42,7 +42,7 @@ public class TokenMember : MonoBehaviour
     [SerializeField]
     private int position;
     [SerializeField]
-    private VideoPlayer videoPlayer;
+    private VideoPlayer[] videoPlayers;
     public VideoClip[] videoClips;
 
     //VoiceParticleSystem voiceParticleSystem;
@@ -56,10 +56,10 @@ public class TokenMember : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        videoPlayer = screen.GetComponentInParent<VideoPlayer>();
-        videoPlayer.isLooping = true;
-        videoPlayer.clip = videoClips[0];
-        videoPlayer.Play();
+        videoPlayers = GetComponentsInChildren<VideoPlayer>();
+        videoPlayers[0].isLooping = true;
+        //videoPlayers.clip = videoClips[0];
+        videoPlayers[0].Play();
         voiceVisualizer.enabled = false;
         //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
@@ -166,7 +166,7 @@ public class TokenMember : MonoBehaviour
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
         //StartCoroutine(RotateMe());
 
-        screen.GetComponent<FadeInOut>().FadeOut(1);
+        screens[0].GetComponent<FadeInOut>().FadeOut(1);
         voiceVisualizer.enabled = true;
         particleSystemRing.Play();
         GetComponentInChildren<TextSpinner>().Enabled = true;
@@ -175,15 +175,17 @@ public class TokenMember : MonoBehaviour
     //TODO: implement
     private void SpeechRequest()
     {
-        videoPlayer.clip = videoClips[2];
-        videoPlayer.Prepare();
-        videoPlayer.waitForFirstFrame = true;
-        videoPlayer.isLooping = false;
-        videoPlayer.Play();
+        //videoPlayer.clip = videoClips[2];
+        videoPlayers[0].Stop();
+        videoPlayers[1].Stop();
+        videoPlayers[1].Prepare();
+        videoPlayers[1].waitForFirstFrame = true;
+        videoPlayers[1].isLooping = false;
+        videoPlayers[1].Play();
 
         Debug.Log("Redewunsch von Member " + Position + ".");
-        screen.GetComponent<FadeInOut>().FadeIn(0);
-        screen.GetComponent<FadeInOut>().FadeOut(4);
+        screens[1].GetComponent<FadeInOut>().FadeIn(0);
+        screens[1].GetComponent<FadeInOut>().FadeOut(4);
     }
 
     IEnumerator RotateMe()
