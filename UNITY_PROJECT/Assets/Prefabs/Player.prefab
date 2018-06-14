@@ -1653,7 +1653,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.8
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1969,7 +1969,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 10000
+    maxNumParticles: 50
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -6211,7 +6211,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6527,7 +6527,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 10000
+    maxNumParticles: 5000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -6674,7 +6674,7 @@ ParticleSystem:
     arc:
       value: 360
       mode: 0
-      spread: 0.00001
+      spread: 0.0000001
       speed:
         serializedVersion: 2
         minMaxState: 0
@@ -10703,7 +10703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.004697, y: -4.995784}
+  m_AnchoredPosition: {x: -4.0024757, y: -6.9109917}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &328167957863603692
