@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 4704822598395560}
   - component: {fileID: 198296680034258836}
   - component: {fileID: 199693497692281422}
+  - component: {fileID: 114325777367173794}
   m_Layer: 0
   m_Name: ring
   m_TagString: Untagged
@@ -1235,6 +1236,18 @@ MonoBehaviour:
   Band: 4
   StartScale: 0.1
   ScaleMultiplier: 1
+--- !u!114 &114325777367173794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398946095790064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d471416701fdc44b3b97afa1ec0b8cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RadiusDelta: 0.1
 --- !u!114 &114360313171354448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1317,7 +1330,7 @@ MonoBehaviour:
   videoClips:
   - {fileID: 32900000, guid: fd669f1ac1e215b4bb52befd78bed751, type: 3}
   - {fileID: 32900000, guid: 346bcd0c73020594b8b0c9939f1b07dd, type: 3}
-  - {fileID: 32900000, guid: 4945425b16d197a4da5540a1d9f80ddd, type: 3}
+  - {fileID: 0}
   initialPlacement: 1
 --- !u!114 &114488508058078790
 MonoBehaviour:
@@ -1385,7 +1398,7 @@ MonoBehaviour:
   videoClips:
   - {fileID: 32900000, guid: fd669f1ac1e215b4bb52befd78bed751, type: 3}
   - {fileID: 32900000, guid: 346bcd0c73020594b8b0c9939f1b07dd, type: 3}
-  - {fileID: 32900000, guid: 4945425b16d197a4da5540a1d9f80ddd, type: 3}
+  - {fileID: 0}
   tokenIsPlaced: 0
   position: 0
   initialPlacement: 1
@@ -6042,7 +6055,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.94
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6674,7 +6687,7 @@ ParticleSystem:
     arc:
       value: 360
       mode: 0
-      spread: 0.0000001
+      spread: 0
       speed:
         serializedVersion: 2
         minMaxState: 0
@@ -6734,7 +6747,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 2000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7172,9 +7185,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.7490196, b: 1, a: 1}
+        key0: {r: 0, g: 0.85490197, b: 1, a: 1}
         key1: {r: 0.14901961, g: 0.3137255, b: 0.4509804, a: 1}
-        key2: {r: 0, g: 0.7490196, b: 1, a: 0}
+        key2: {r: 0, g: 0.85490197, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -8456,7 +8469,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 1
+    enabled: 0
     strength:
       serializedVersion: 2
       minMaxState: 0
