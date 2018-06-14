@@ -159,7 +159,7 @@ public class TokenMember : MonoBehaviour
     }
 
     //TODO: implement
-    private void InitialTokenAction()
+    public void InitialTokenAction()
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
 

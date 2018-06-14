@@ -1251,7 +1251,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1792937173992596}
-  m_Text: Teilnehmer
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 0.7
   m_LineSpacing: 1

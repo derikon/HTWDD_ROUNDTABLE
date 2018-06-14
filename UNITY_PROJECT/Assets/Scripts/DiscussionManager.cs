@@ -25,17 +25,29 @@ public class DiscussionManager : MonoBehaviour
 
     public void OnDiscussionReady(Discussion discussion)
     {
-        for (int i = 0; i <= discussion.memberList.Count; i++)
+        discussionMembers[0].GetComponentInChildren<TextMesh>().text = "Moderator";
+
+        for (int i = 1; i <= 6; i++)
         {
-            if (i == 0)
+            bool placeNumberFound = false;
+            for (int j = 0; j < discussion.memberList.Count; j++)
             {
-                discussionMembers[i].GetComponentInChildren<TextMesh>().text = "Moderator";
+                if (discussion.memberList[j].placenumber == i)
+                {
+                    placeNumberFound = true;
+                    discussionMembers[i].GetComponentInChildren<TextMesh>().text = discussion.memberList[j].name;
+                }
             }
-            else
+
+            if (!placeNumberFound)
             {
-                discussionMembers[i].GetComponentInChildren<TextMesh>().text = discussion.memberList[i - 1].name;
+                discussionMembers[i].GetComponentInChildren<TextMesh>().text = "";
+                TokenMember tokenMember = discussionMembers[i].GetComponentInParent<TokenMember>();
+                tokenMember.InitialTokenAction();
+                tokenMember.GetComponent<MicVisualizer>().enabled = false;
             }
         }
+
 
     }
 

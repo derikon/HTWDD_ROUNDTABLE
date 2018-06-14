@@ -69,7 +69,7 @@ public class CirclePlacement : MonoBehaviour
             {
                 foreach (var tm in textMesh)
                 {
-                    tm.text = "Teilnehmer " + i;
+                    tm.text = "Platz " + i;
                 }
             }
         }
