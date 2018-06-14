@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MicVisualizer : MonoBehaviour
 {
     private MicControlC micControl;
-    private VoiceParticleSystem voiceParticleSystem;
+    DateTime triggerTime;
+    TimeSpan timeSpan = new TimeSpan(0, 0, 0, 0, 200);
+
+    public float loudnessThreshhold;
+    public float currentLoudness;
+    public ParticleSystem particleSystemNoise;
 
     public float[] FreqBands = new float[8];
     float average = 0;
@@ -14,14 +20,19 @@ public class MicVisualizer : MonoBehaviour
     void Start()
     {
         micControl = GetComponentInChildren<MicControlC>();
-        voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
+        triggerTime = DateTime.Now;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // TODO: delete MakeFreqBands
         MakeFreqBands();
-        MakeItRain();
+        if (DateTime.Now.Subtract(triggerTime) > timeSpan)
+        {
+            triggerTime = DateTime.Now;
+            TriggerParticleSystem();
+        }
     }
 
     private void MakeFreqBands()
@@ -35,8 +46,6 @@ public class MicVisualizer : MonoBehaviour
         {
             average = 0;
             int sampleCount = (int)Mathf.Pow(2, i) * 2;
-
-            //Debug.Log("SampleCount: " + sampleCount);
 
             for (int j = 0; j < sampleCount; j++)
             {
@@ -53,45 +62,29 @@ public class MicVisualizer : MonoBehaviour
         }
     }
 
-    private void MakeItRain()
+    private void TriggerParticleSystem()
     {
-        int count = 0;
+        currentLoudness = Mathf.Round((micControl.loudness < 0.001 ? 0f : micControl.loudness) * 100) / 100;
 
-        var spectrum = micControl.spectrumData;
-        int spectrumLength = micControl.spectrumData.Length;
-
-        for (int i = 0; i < 8; i++)
+        if (currentLoudness > loudnessThreshhold)
         {
-            average = 0;
-            int sampleCount = (int)Mathf.Pow(2, i) * 2;
-
-            Debug.Log("SampleCount: " + sampleCount);
-
-            for (int j = 0; j < sampleCount; j++)
+            if (!particleSystemNoise.isPlaying)
             {
-                if (count < spectrumLength)
-                {
-                    average += micControl.spectrumData[count] * (count + 1);
-                }
-                count++;
+                // Enable playing for at least 1 second
+                timeSpan = new TimeSpan(0, 0, 0, 1);
+                particleSystemNoise.Play();
+                Debug.Log("Noise is playing");
             }
-
-            average /= count;
         }
-
-        //if (average > average - 1)
-        //{
-        //    Debug.Log("MAKE IT RAIN BABY!");
-        //    if (voiceParticleSystem != null)
-        //    {
-        //        if (!voiceParticleSystem.NoiseSystem.isPlaying)
-        //            voiceParticleSystem.NoiseSystem.Play();
-        //    }
-        //    else
-        //    {
-        //        if (voiceParticleSystem.NoiseSystem.isPlaying)
-        //            voiceParticleSystem.NoiseSystem.Stop();
-        //    }
-        //}
+        else
+        {
+            if (particleSystemNoise.isPlaying)
+            {
+                // new timespan, so that every 200ms the Method will be checked again
+                timeSpan = new TimeSpan(0, 0, 0, 0, 50);
+                particleSystemNoise.Stop();
+                Debug.Log("Noise stopped now");
+            }
+        }
     }
 }

@@ -9,6 +9,8 @@ public class TokenMember : MonoBehaviour
     public GameObject screen;
     public TextMesh textmesh;
 
+    public ParticleSystem particleSystemRing;
+    public MicVisualizer voiceVisualizer;
 
     [SerializeField]
     private bool tokenIsPlaced = false;
@@ -39,7 +41,11 @@ public class TokenMember : MonoBehaviour
 
     [SerializeField]
     private int position;
+    [SerializeField]
     private VideoPlayer videoPlayer;
+    public VideoClip[] videoClips;
+
+    //VoiceParticleSystem voiceParticleSystem;
 
     [SerializeField]
     private bool initialPlacement = true;
@@ -50,61 +56,83 @@ public class TokenMember : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        videoPlayer = GetComponent<VideoPlayer>();
+        videoPlayer = screen.GetComponentInParent<VideoPlayer>();
+        videoPlayer.isLooping = true;
+        videoPlayer.clip = videoClips[0];
+        videoPlayer.Play();
+        voiceVisualizer.enabled = false;
+        //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void useKeyboard()
+    {
+        //if (Input.GetKeyUp("down"))
+        //{
+        //    InitialTokenAction();
+        //}
+
+        if (Input.GetKeyUp("up"))
+        {
+            if (initialPlacement)
+            {
+                Debug.Log("INITIAL PLACEMENT ON POS " + Position);
+                initialPlacement = false;
+                InitialTokenAction();
+            }
+            else
+            {
+                SpeechRequest();
+            }
+        }
+    }
+
+    void useSerial()
     {
         if (serialPort == null)
             return;
 
         if (string.IsNullOrEmpty(COMPort) || !serialPort.IsOpen) return;
 
-        try
+        string output = "";
+        try { output = serialPort.ReadLine(); }
+        catch (System.Exception) { }
+
+        if (output == "")
         {
-            string output = serialPort.ReadLine();
-            if (output != tokenIsPlaced.ToString())
-            {
-                switch (output)
+            return;
+        }
+
+        Debug.LogWarning("read serial port: " + output);
+        switch (output)
+        {
+            case "true":
+                Debug.LogWarning("Token on Position " + Position + " is placed!");
+                tokenIsPlaced = true;
+                if (initialPlacement)
                 {
-                    case "true":
-                        Debug.Log("Token on Position " + Position + " is placed!");
-                        tokenIsPlaced = true;
-                        //screen.SetActive(true);
-                        videoPlayer.Play();
-                        if (initialPlacement)
-                        {
-                            initialPlacement = false;
-                            InitialTokenAction();
-                        }
-                        else
-                        {
-                            SpeechRequest();
-                        }
-
-                        break;
-
-                    case "false":
-                        Debug.Log("Token on Position " + Position + " is removed!");
-                        tokenIsPlaced = false;
-                        //screen.SetActive(false);
-                        videoPlayer.Stop();
-                        break;
-
-                    default:
-                        Debug.LogWarning("COMPort " + COMPort + " - Ignored Output from Arduino: " + output);
-                        break;
+                    Debug.LogWarning("INITIAL PLACEMENT ON POS " + Position);
+                    initialPlacement = false;
+                    InitialTokenAction();
+                }
+                else
+                {
+                    SpeechRequest();
                 }
 
-            }
-        }
-        catch (System.Exception)
-        {
-            // Nothing to do here, because else the log would be flooded
-        }
+                break;
 
+            case "false":
+                Debug.Log("Token on Position " + Position + " is removed!");
+                tokenIsPlaced = false;
+                break;
+        }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        useKeyboard();
+        useSerial();
     }
 
     public bool InitializeComPort(string comPort)
@@ -136,14 +164,25 @@ public class TokenMember : MonoBehaviour
     {
         Debug.Log("Hallo du auf Position " + Position + "!");
         //Debug.LogWarning("[TokenMember.cs] InitialTokenAction() not implemented!");
-        StartCoroutine(RotateMe());
+        //StartCoroutine(RotateMe());
+
+        screen.GetComponent<FadeInOut>().FadeOut(5);
+        voiceVisualizer.enabled = true;
+        particleSystemRing.Play();
     }
 
     //TODO: implement
     private void SpeechRequest()
     {
+        videoPlayer.clip = videoClips[2];
+        videoPlayer.Prepare();
+        videoPlayer.waitForFirstFrame = true;
+        videoPlayer.isLooping = false;
+        videoPlayer.Play();
+
         Debug.Log("Redewunsch von Member " + Position + ".");
-        //Debug.LogWarning("[TokenMember.cs] SpeechRequest() not implemented!");
+        screen.GetComponent<FadeInOut>().FadeIn(0);
+        screen.GetComponent<FadeInOut>().FadeOut(4);
     }
 
     IEnumerator RotateMe()

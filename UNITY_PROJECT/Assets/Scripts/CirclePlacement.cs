@@ -37,6 +37,10 @@ public class CirclePlacement : MonoBehaviour
 
             if (i == 0)
             {
+                // Deactivate MemberScript
+                //var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+                tokenMember.enabled = false;
+
                 SpawnModerator();
                 tokenModerator.Position = i;
                 var resultMod = tokenModerator.InitializeComPort(comPortConf.COMPosMod);
@@ -45,6 +49,9 @@ public class CirclePlacement : MonoBehaviour
             {
                 // TODO: create static list of possible comports and decide which to
                 // use as argument
+                //var tokenMember = players[i].GetComponentInChildren<TokenMember>();
+                tokenModerator.enabled = false;
+
                 var resultMem = tokenMember.InitializeComPort(comPortConf.comPortArray[i - 1]);
                 tokenMember.Position = i;
                 // Add MicController
@@ -107,8 +114,8 @@ public class CirclePlacement : MonoBehaviour
 public class COMPortConf
 {
     //TODO: COM Ports definieren
-    public String[] comPortArray = { "", "", "", "", "" };
-    private string cOMPosMod = "";
+    public String[] comPortArray = { "21", "", "", "", "" };
+    private string cOMPosMod = "22";
 
     public string COMPosMod
     {
