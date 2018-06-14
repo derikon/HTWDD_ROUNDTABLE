@@ -53,13 +53,13 @@ public class DiscussionManager : MonoBehaviour
 
     public void OnRecievedTopic(string topic)
     {
-        //GameObject.FindGameObjectWithTag("DiscussionTopic").GetComponent<TextMesh>().text = topic;
         DiscussionTopic.GetComponent<TextMesh>().text = topic;
+        DiscussionTopic.GetComponent<TextSpinner>().Enabled = DiscussionTopic.GetComponent<TextSpinner>().EnableFading = true;
+
     }
 
     public void OnRecievedRemainingTime(string remainingTime)
     {
-        //GameObject.FindGameObjectWithTag("RemainingTime").GetComponent<TextMesh>().text = remainingTime;
         RemainingTime.GetComponent<TextMesh>().text = remainingTime;
     }
 
