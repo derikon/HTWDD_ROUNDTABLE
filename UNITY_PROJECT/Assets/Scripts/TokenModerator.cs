@@ -159,7 +159,7 @@ public class TokenModerator : MonoBehaviour
     }
 
     // TODO: implement (animation)
-    void BuzzerAction()
+    public void BuzzerAction()
     {
         triggerTime = DateTime.Now;
 

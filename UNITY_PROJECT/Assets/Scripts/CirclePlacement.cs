@@ -115,7 +115,7 @@ public class COMPortConf
 {
     //TODO: COM Ports definieren
     public String[] comPortArray = { "", "", "", "", "" };
-    private string cOMPosMod = "22";
+    private string cOMPosMod = "";
 
     public string COMPosMod
     {

@@ -66,4 +66,13 @@ public class DiscussionManager : MonoBehaviour
         RemainingTime.GetComponent<FadeInOut>().FadeOut(4);
     }
 
+    public void OnRecievedSilence()
+    {
+        discussionObject.GetComponentInChildren<TokenModerator>().BuzzerAction();
+        //screen.GetComponent<FadeInOut>().FadeOut(5);
+        //particleSystemRing.Play();
+        //GetComponentInChildren<TextSpinner>().Enabled = true;
+    }
+
+
 }

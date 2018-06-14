@@ -35,7 +35,7 @@ public class SocketIOReceiver : MonoBehaviour
         socket.On("start_pause", OnStartPause);
         socket.On("end_pause", OnEndPause);
         socket.On("topic", OnTopic);
-        //socket.On("silence", OnSilence);
+        socket.On("silence", OnSilence);
     }
 
 
@@ -152,6 +152,13 @@ public class SocketIOReceiver : MonoBehaviour
     public void AckToServer()
     {
         socket.Emit("ack");
+    }
+
+
+    void OnSilence(SocketIOEvent e)
+    {
+        Debug.Log("[SocketIO] Silence Triggered");
+        DiscussionManager.OnRecievedSilence();
     }
 
     private JSONObject getPayload(SocketIOEvent e)
