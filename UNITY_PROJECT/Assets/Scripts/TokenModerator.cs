@@ -104,7 +104,7 @@ public class TokenModerator : MonoBehaviour
             {
                 switch (output)
                 {
-                    case "true":
+                    case "1":
                         Debug.Log("Moderator Token is placed!");
                         tokenIsPlaced = true;
                         if (initialPlacement)
@@ -118,7 +118,7 @@ public class TokenModerator : MonoBehaviour
                         }
                         break;
 
-                    case "false":
+                    case "0":
                         tokenIsPlaced = false;
                         break;
 
