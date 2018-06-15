@@ -794,7 +794,7 @@ MonoBehaviour:
   Enabled: 0
   EnableFading: 0
   ReferenceObject: {fileID: 783905363}
-  RotationSpeed: 0.5
+  RotationSpeed: 0.3
   AngleMax: 720
   FadeOutSpeed: 1
   _angleCum: 0
