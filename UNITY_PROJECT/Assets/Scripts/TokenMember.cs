@@ -173,11 +173,12 @@ public class TokenMember : MonoBehaviour
     private void SpeechRequest()
     {
         videoPlayers[0].Stop();
-        videoPlayers[1].Stop();
-        videoPlayers[1].Prepare();
-        videoPlayers[1].waitForFirstFrame = true;
-        videoPlayers[1].isLooping = false;
-        videoPlayers[1].Play();
+        videoPlayers[0].enabled = false;
+        //videoPlayers[1].Stop();
+        //videoPlayers[1].Prepare();
+        //videoPlayers[1].waitForFirstFrame = true;
+        //videoPlayers[1].isLooping = false;
+        //videoPlayers[1].Play();
 
         Debug.Log("Redewunsch von Member " + Position + ".");
         screens[1].GetComponent<FadeInOut>().FadeIn(0);
