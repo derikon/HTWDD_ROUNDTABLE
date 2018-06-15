@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
 using UnityEngine.Video;
+using UnityEditor;
 
 public class TokenMember : MonoBehaviour
 {
@@ -57,19 +58,24 @@ public class TokenMember : MonoBehaviour
     {
         videoPlayers = GetComponentsInChildren<VideoPlayer>();
         videoPlayers[0].isLooping = true;
-        //videoPlayers.clip = videoClips[0];
         videoPlayers[0].Play();
         voiceVisualizer.enabled = false;
-        //voiceParticleSystem = GetComponentInChildren<VoiceParticleSystem>();
+
+        videoPlayers[1].isLooping = true;
+        videoPlayers[1].Play();
+
+        string texturePath = "Assets/Resources/Textures/RenderTexture Redewunsch " + position + ".renderTexture";
+        RenderTexture rt = (RenderTexture)AssetDatabase.LoadAssetAtPath(texturePath, typeof(RenderTexture));
+        rt.name = "RenderTexture Redewunsch Platz " + position;
+        videoPlayers[1].targetTexture = rt;
+
+        string clipPath = "Assets/Resources/Animations/Redewunsch " + Position + ".mov";
+        VideoClip videoClip = (VideoClip)AssetDatabase.LoadAssetAtPath(clipPath, typeof(VideoClip));
+        videoPlayers[1].clip = videoClip;
     }
 
     private void useKeyboard()
     {
-        //if (Input.GetKeyUp("down"))
-        //{
-        //    InitialTokenAction();
-        //}
-
         if (Input.GetKeyUp("up"))
         {
             if (initialPlacement)
@@ -101,7 +107,7 @@ public class TokenMember : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning("read serial port: " + output);
+        //Debug.LogWarning("read serial port: " + output);
         switch (output)
         {
             case "1":
@@ -161,7 +167,7 @@ public class TokenMember : MonoBehaviour
     //TODO: implement
     public void InitialTokenAction()
     {
-        Debug.Log("Hallo du auf Position " + Position + "!");
+        //Debug.Log("Hallo du auf Position " + Position + "!");
 
         screens[0].GetComponent<FadeInOut>().FadeOut(1);
         voiceVisualizer.enabled = true;
@@ -172,12 +178,13 @@ public class TokenMember : MonoBehaviour
     //TODO: implement
     private void SpeechRequest()
     {
-        videoPlayers[0].Stop();
-        videoPlayers[1].Stop();
-        videoPlayers[1].Prepare();
-        videoPlayers[1].waitForFirstFrame = true;
-        videoPlayers[1].isLooping = false;
-        videoPlayers[1].Play();
+        //videoPlayers[0].Stop();
+        //screens[0].SetActive(videoPlayers[0].enabled = false);
+        //videoPlayers[1].Stop();
+        //videoPlayers[1].Prepare();
+        ////videoPlayers[1].waitForFirstFrame = true;
+        //videoPlayers[1].isLooping = true;
+        //videoPlayers[1].Play();
 
         Debug.Log("Redewunsch von Member " + Position + ".");
         screens[1].GetComponent<FadeInOut>().FadeIn(0);

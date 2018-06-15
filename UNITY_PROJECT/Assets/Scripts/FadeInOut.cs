@@ -129,7 +129,7 @@ public class FadeInOut : MonoBehaviour
         }
 
 
-        Debug.Log("fade sequence end : " + fadingOut);
+        //Debug.Log("fade sequence end : " + fadingOut);
 
     }
 
