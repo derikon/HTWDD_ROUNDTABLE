@@ -174,7 +174,7 @@ public class JsonReader : MonoBehaviour
                 if (localMap[key].type == JSONObject.Type.STRING)
                 {
                     Debug.Log("Got Topic: " + localMap[key]);
-                    topic = ripQuotationMarks(localMap[key].ToString());
+                    topic = formateStringNewLine(ripQuotationMarks(localMap[key].ToString()));
                 }
 
             }
@@ -218,5 +218,14 @@ public class JsonReader : MonoBehaviour
         return ripQuotetString;
         ;
     }
+
+    private string formateStringNewLine(string rawString)
+    {
+        string formatedString = "";
+        formatedString = rawString.Replace("\\n", "\n");
+
+        return formatedString;
+    }
 }
+
 
